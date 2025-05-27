@@ -26,10 +26,10 @@ Clone or download this repository, and include the macro file in your Z80 assemb
 
   INCLUDE "include/macros/8-bit-maths.macros.asm"
 
-  ld a, 20
+  ld a, 20<br>
   MIN_UNSIGNED_A_VAL 42    ; Sets A to 42 if A < 42
 
-  ld a, (myvar)
+  ld a, (myvar)<br>
   ABS8_A                   ; Makes A = |A| if A is signed
 
   ADD_ADDR_REG myvar, b    ; Adds B to the byte at myvar
@@ -38,16 +38,20 @@ Clone or download this repository, and include the macro file in your Z80 assemb
 
 ## Macro List
 
-  | Macro                | Description                              |
-  | -------------------- | ---------------------------------------- |
-  | `MIN_UNSIGNED_A_VAL` | Clamp A to a minimum value               |
-  | `MAX_UNSIGNED_A_VAL` | Clamp A to a maximum value               |
-  | `ADD_ADDR_REG`       | Add a register value to a memory address |
-  | `ADD_ADDR_ADDR`      | Add one memory location to another       |
-  | `ADD_IX`             | Add values at IX+offsets                 |
-  | `SUM_IX`             | Sum two IX offsets into another          |
-  | `NEG8_IXPLUS`        | Negate value at (IX + n)                 |
-  | `ABS8_IXPLUS`        | Absolute value of (IX + n)               |
-  | `ABS8_A`             | Absolute value of register A             |
-  | `ABS8_HLPTR`         | Absolute value of (HL)                   |
-  | `ABS8_DEPTR`         | Absolute value of (DE)                   |
+| Macro                 | Description                                                 |
+|-----------------------|-------------------------------------------------------------|
+| `MIN_UNSIGNED_A_VAL`  | Clamp A to a minimum value (A = min(A, val))                |
+| `MAX_UNSIGNED_A_VAL`  | Clamp A to a maximum value (A = max(A, val))                |
+| `ADD_ADDR_REG`        | Add a register value to memory: equiv. to add (**), r       |
+| `ADD_ADDR_ADDR`       | Add one memory location to another: (addr1) += (addr2)      |
+| `ADD_IX`              | Add values at IX+offsets: (ix+idx1) += (ix+idx2)            |
+| `SUM_IX`              | Compute (ix+idx1) = (ix+idx2) + (ix+idx3)                   |
+| `NEG8_IXPLUS`         | Negate value at (ix+n): (ix+n) = -(ix+n); borks A and F     |
+| `ABS8_IXPLUS`         | Absolute value of (ix+n): (ix+n) = abs(ix+n)                |
+| `ABS8_A`              | Absolute value of A (if signed)                             |
+| `ABS8_HLPTR`          | Absolute value of value at (HL): (hl) = abs((hl))           |
+| `ABS8_DEPTR`          | Absolute value of value at (DE): (de) = abs((de));          |
+
+## License
+This project is licensed under the MIT License.
+See the LICENSE file for details.
