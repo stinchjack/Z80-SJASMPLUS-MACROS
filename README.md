@@ -38,20 +38,19 @@ Clone or download this repository, and include the macro file in your Z80 assemb
 
 ## Macro List
 
-| Macro                 | Description                                                 | Z80 Syntax equivalent     | Notes
-|-----------------------|-------------------------------------------------------------|---------------------------|-----------------|
-| `MIN_UNSIGNED_A_VAL`  | Clamp A to a minimum value (A = min(A, val))                |                           | Corrupts AF     |
-| `MAX_UNSIGNED_A_VAL`  | Clamp A to a maximum value (A = max(A, val))                |                           | Corrupts AF     |
-| `ADD_ADDR_REG`        | Add a register (other than A) or value to memory address    | add (**), r               | Corrupts A      |
-| `ADD_ADDR_ADDR`       | Add one memory location to another: (addr1) += (addr2)      | add (**), (**)            | Corrupts A      |
-| `ADD_IX`              | Add values at IX+offsets: (ix+idx1) += (ix+idx2)            | add (ix+idx1), (ix+idx2)  | Corrupts A      |
-| `SUM_IX`              | Compute (ix+idx1) = (ix+idx2) + (ix+idx3)                   | ld (ix+idx1), (ix+idx2)<br>  add (ix+idx2), (ix+idx3)  | Corrupts A      |
-| `NEG8_IXPLUS`         | Negate value at (ix+n): (ix+n) = -(ix+n);                   |                           | Corrupts AF     |
-| `ABS8_IXPLUS`         | Absolute value of (ix+n): (ix+n) = abs(ix+n)                |                           | Corrupts AF     |
-| `ABS8_A`              | Absolute value of A (if signed)                             |                           | Corrupts Flags  |
-| `ABS8_HLPTR`          | Absolute value of value at (HL): (hl) = abs((hl))           |                           | Corrupts AF     |
-| `ABS8_DEPTR`          | Absolute value of value at (DE): (de) = abs((de));          |                           | Corrupts AF     |
-
+| Macro                 | Parameters (Type)                          | Description                                                 | Z80 Syntax Equivalent                           | Notes           |
+|----------------------|--------------------------------------------|-------------------------------------------------------------|--------------------------------------------------|-----------------|
+| `MIN_UNSIGNED_A_VAL` | `val` — immediate 8-bit unsigned constant  | Clamp A to a minimum value (A = min(A, val))                | `cp val`<br>`ld a, val`                         | Corrupts AF     |
+| `MAX_UNSIGNED_A_VAL` | `val` — immediate 8-bit unsigned constant  | Clamp A to a maximum value (A = max(A, val))                | `cp val`<br>`ld a, val`                         | Corrupts AF     |
+| `ADD_ADDR_REG`       | `addr` — memory address<br>`reg` — 8-bit register (not A) | Add a register value to memory at address                   | `ld a, (addr)`<br>`add reg`<br>`ld (addr), a`   | Corrupts A      |
+| `ADD_ADDR_ADDR`      | `addr1` — destination memory address<br>`addr2` — source memory address | Add one memory location to another: (addr1) += (addr2) | `ld hl, addr2`<br>`ld a, (addr1)`<br>`add (hl)`<br>`ld (addr1), a` | Corrupts A |
+| `ADD_IX`             | `idx1` — IX offset dest<br>`idx2` — IX offset src | Add values at IX+offsets: (ix+idx1) += (ix+idx2)        | `ld a, (ix+idx1)`<br>`add (ix+idx2)`<br>`ld (ix+idx1), a` | Corrupts A |
+| `SUM_IX`             | `idx1` — IX offset dest<br>`idx2`, `idx3` — IX offsets src | Compute (ix+idx1) = (ix+idx2) + (ix+idx3)          | `ld a, (ix+idx2)`<br>`add (ix+idx3)`<br>`ld (ix+idx1), a` | Corrupts A |
+| `NEG8_IXPLUS`        | `n` — signed 8-bit IX offset               | Negate value at (ix+n): (ix+n) = -(ix+n)                    | `xor a`<br>`sub (ix+n)`<br>`ld (ix+n), a`       | Corrupts AF     |
+| `ABS8_IXPLUS`        | `n` — signed 8-bit IX offset               | Absolute value of (ix+n): (ix+n) = abs(ix+n)                | `ld a, (ix+n)`<br>`bit 7, a`<br>`neg if negative` | Corrupts AF   |
+| `ABS8_A`             | *(none)*                                   | Absolute value of A (if signed)                             | `bit 7, a`<br>`neg if negative`                 | Corrupts Flags  |
+| `ABS8_HLPTR`         | *(none)*                                   | Absolute value of value at (HL): (hl) = abs((hl))           | `bit 7, (hl)`<br>`ld a, (hl)`<br>`neg`<br>`ld (hl), a` | Corrupts AF |
+| `ABS8_DEPTR`         | *(none)*                                   | Absolute value of value at (DE): (de) = abs((de))           | `ex de, hl` + same as above, then `ex de, hl`   | Corrupts AF     |
 ## License
 This project is licensed under the MIT License.
 See the LICENSE file for details.
