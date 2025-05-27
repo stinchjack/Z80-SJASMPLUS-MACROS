@@ -38,20 +38,20 @@ Clone or download this repository, and include the macro file in your Z80 assemb
 
 ## Macro List
 
-| Macro                 | Description                                                 | Z80 Syntax equivalent     |
-|-----------------------|-------------------------------------------------------------|---------------------------|
-| `MIN_UNSIGNED_A_VAL`  | Clamp A to a minimum value (A = min(A, val))                |                           |
-| `MAX_UNSIGNED_A_VAL`  | Clamp A to a maximum value (A = max(A, val))                |                           |
-| `ADD_ADDR_REG`        | Add a register value to memory address                      | add (**), r               |
-| `ADD_ADDR_ADDR`       | Add one memory location to another: (addr1) += (addr2)      | add (**), (**)            |
-| `ADD_IX`              | Add values at IX+offsets: (ix+idx1) += (ix+idx2)            | add (ix+idx1), (ix+idx2)  |
-| `SUM_IX`              | Compute (ix+idx1) = (ix+idx2) + (ix+idx3)                   | ld (ix+idx1), (ix+idx2)   |
-|                       |                                                             | add (ix+idx2), (ix+idx3)  |
-| `NEG8_IXPLUS`         | Negate value at (ix+n): (ix+n) = -(ix+n); borks A and F     |                           |
-| `ABS8_IXPLUS`         | Absolute value of (ix+n): (ix+n) = abs(ix+n)                |                           |
-| `ABS8_A`              | Absolute value of A (if signed)                             |                           |
-| `ABS8_HLPTR`          | Absolute value of value at (HL): (hl) = abs((hl))           |                           |
-| `ABS8_DEPTR`          | Absolute value of value at (DE): (de) = abs((de));          |                           |
+| Macro                 | Description                                                 | Z80 Syntax equivalent     | Notes
+|-----------------------|-------------------------------------------------------------|---------------------------|-----------------|
+| `MIN_UNSIGNED_A_VAL`  | Clamp A to a minimum value (A = min(A, val))                |                           | Corrupts AF     |
+| `MAX_UNSIGNED_A_VAL`  | Clamp A to a maximum value (A = max(A, val))                |                           | Corrupts AF     |
+| `ADD_ADDR_REG`        | Add a register (other than A) or value to memory address    | add (**), r               | Corrupts A      |
+| `ADD_ADDR_ADDR`       | Add one memory location to another: (addr1) += (addr2)      | add (**), (**)            | Corrupts A      |
+| `ADD_IX`              | Add values at IX+offsets: (ix+idx1) += (ix+idx2)            | add (ix+idx1), (ix+idx2)  | Corrupts A      |
+| `SUM_IX`              | Compute (ix+idx1) = (ix+idx2) + (ix+idx3)                   | ld (ix+idx1), (ix+idx2)   | Corrupts A      |
+|                       |                                                             | add (ix+idx2), (ix+idx3)  |                 |
+| `NEG8_IXPLUS`         | Negate value at (ix+n): (ix+n) = -(ix+n);                   |                           | Corrupts AF     |
+| `ABS8_IXPLUS`         | Absolute value of (ix+n): (ix+n) = abs(ix+n)                |                           | Corrupts AF     |
+| `ABS8_A`              | Absolute value of A (if signed)                             |                           | Corrupts Flags  |
+| `ABS8_HLPTR`          | Absolute value of value at (HL): (hl) = abs((hl))           |                           | Corrupts AF     |
+| `ABS8_DEPTR`          | Absolute value of value at (DE): (de) = abs((de));          |                           | Corrupts AF     |
 
 ## License
 This project is licensed under the MIT License.
