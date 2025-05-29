@@ -51,6 +51,7 @@
   ; ----------------------------------------------------------------------------
   ; ADD_ADDR_ADDR addr1, addr2
   ; Adds contents of addr2 to addr1:  (addr1) += (addr2)
+  ; Uses up A register
   ; ----------------------------------------------------------------------------
   MACRO ADD_ADDR_ADDR addr1, addr2
       push hl
