@@ -12,7 +12,7 @@
   ;
   ; Usage:
   ;   Include this file in your SJASMPlus project using:
-  ;     INCLUDE "macro8bitmaths.inc"
+  ;     INCLUDE "8-bit-maths-macros.inc"
   ; ============================================================================
 
   IFNDEF MACRO8BITMATHS
@@ -26,7 +26,7 @@
       cp val
       jr c, .end
       ld a, val
-  .end
+.end:
   ENDM
 
   ; ----------------------------------------------------------------------------
@@ -37,7 +37,7 @@
       cp val
       jr nc, .end
       ld a, val
-  .end:
+.end:
   ENDM
 
   ; ----------------------------------------------------------------------------
@@ -114,7 +114,7 @@
       bit 7, a
       jr z, .end
       neg
-  .end:
+.end:
   ENDM
 
   ; ----------------------------------------------------------------------------
@@ -128,7 +128,7 @@
       ld a, (hl)
       neg
       ld (hl), a
-  .end:
+.end:
   ENDM
 
   ; ----------------------------------------------------------------------------
@@ -144,7 +144,7 @@
       neg
       ld (hl), a
       ex de, hl
-  .end:
+.end:
   ENDM
 
   ENDIF
