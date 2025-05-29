@@ -5,4 +5,4 @@
   DEFINE SJASMPLUSMACROSASM
   INCLUDE "8-bit-conditional-branch.macro.asm"
   INCLUDE "8-bit-maths.macros.asm"
-  ENDIF SJASMPLUSMACROSASM
+  ENDIF

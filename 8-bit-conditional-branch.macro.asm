@@ -37,6 +37,7 @@
   ; ----------------------------------------------------------------------------
   ; BRANCH_HLPTR_EQU val, addr
   ; Branches to 'addr' if (HL) == val
+  ; Uses up A register
   ; ----------------------------------------------------------------------------
   MACRO BRANCH_HLPTR_EQU val, addr
       ld a, val
