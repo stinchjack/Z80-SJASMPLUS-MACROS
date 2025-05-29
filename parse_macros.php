@@ -131,36 +131,33 @@ function parse_asm_macros(string $filename): array {
     return $macros;
 }
 
-
 function generate_markdown(array $fileHeader, array $macros, string $filename): string {
-    // Build markdown header with Description and Key Points
+    // Build markdown header
     $md = "# " . basename($filename) . "\n\n";
 
     if (!empty($fileHeader['Description'])) {
-        $md .= "## Description\n\n";
-        $md .= $fileHeader['Description'] . "\n\n";
+        $md .= "## Description\n\n" . trim($fileHeader['Description']) . "\n\n";
     }
 
     if (!empty($fileHeader['Key Points'])) {
-        $md .= "## Key Points\n\n";
-        $md .= $fileHeader['Key Points'] . "\n\n";
+        $md .= "## Key Points\n\n" . trim($fileHeader['Key Points']) . "\n\n";
     }
 
-    // Table header
-    $md .= "| Macro name | Parameters | Side effects | Usage | Z80 Equivalent | Notes |\n";
-    $md .= "|------------|------------|--------------|-------|----------------|-------|\n";
+    // Markdown table header with Description column added
+    $md .= "| Macro name | Parameters | Description | Side effects | Usage | Z80 Equivalent | Notes |\n";
+    $md .= "|------------|------------|-------------|--------------|-------|----------------|-------|\n";
 
-    // Add each macro row
+    // Escape and format each field
+    $format = fn($text) => str_replace(["|", "\n", "\r"], ["\\|", "<br>", ""], trim((string) $text));
+
     foreach ($macros as $macroName => $info) {
-        // Escape pipe characters inside fields (| breaks markdown tables)
-        $escape = fn($text) => str_replace('|', '\\|', trim($text));
-
-        $md .= "| " . $escape($macroName) . " "
-            . "| " . $escape($info['Parameters'] ?? '') . " "
-            . "| " . $escape($info['Side effects'] ?? '') . " "
-            . "| " . $escape($info['Usage'] ?? '') . " "
-            . "| " . $escape($info['Z80 Equivalent'] ?? '') . " "
-            . "| " . $escape($info['Notes'] ?? '') . " |\n";
+        $md .= "| " . $format($macroName)
+             . " | " . $format($info['Parameters'] ?? '')
+             . " | " . $format($info['Description'] ?? '')
+             . " | " . $format($info['Side effects'] ?? '')
+             . " | " . $format($info['Usage'] ?? '')
+             . " | " . $format($info['Z80 Equivalent'] ?? '')
+             . " | " . $format($info['Notes'] ?? '') . " |\n";
     }
 
     return $md;
