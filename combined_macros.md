@@ -1,4 +1,6 @@
-# $asmFile
+# Z80 Macro Reference
+
+# 8-bit-conditional-branch.macro.asm
 
 ## Description
 
@@ -45,3 +47,41 @@ These macros only deal with 8-bit values.
 | BRANCH_SIGNED_A_GTE_V | v    - 8-bit signed immediate value<br>  dest - label or address to jump if A >= v (signed) | Branches to 'dest' if register A is greater than or equal to v considering signed comparison.<br>  Handles overflow and sign bits. | Modifies flags. | BRANCH_SIGNED_A_GTE_V -5, Label_SignedGTE |  |  |
 | BRANCH_SIGNED_A_LT_V | v    - 8-bit signed immediate value<br>  dest - label or address to jump if A < v (signed) | Branches to 'dest' if register A is less than v considering signed comparison.<br>  Handles overflow and sign bits. | Modifies flags. | BRANCH_SIGNED_A_LT_V 10, Label_SignedLT |  |  |
 | BRANCH_SIGNED_A_LTE_V | v    - 8-bit signed immediate value<br>  dest - label or address to jump if A <= v (signed) | Branches to 'dest' if register A is less than or equal to v considering signed comparison.<br>  Handles overflow and sign bits. | Modifies flags. | BRANCH_SIGNED_A_LTE_V 0, Label_SignedLTE |  |  |
+
+
+# 8-bit-maths.macros.asm
+
+## Description
+
+A collection of assembly macros for Z80 8-bit arithmetic operations using
+  SJASMPlus syntax. These macros simplify common patterns for manipulating
+  8-bit values in registers and memory.
+
+Usage:
+  INCLUDE "8-bit-maths-macros.inc"
+
+## Key Points
+
+These macros work only on 8-bit values
+
+Some macros modify register A and flags
+
+Macros using IX offsets assume signed offsets (-128..127)
+
+ADD_ADDR_REG does NOT accept A as reg parameter
+
+| Macro name | Parameters | Description | Side effects | Usage | Z80 Equivalent | Notes |
+|------------|------------|-------------|--------------|-------|----------------|-------|
+| MIN_UNSIGNED_A_VAL | val - immediate 8-bit unsigned constant | Clamp register A to a minimum value (A = max(A, val)).<br>  If A < val, then A is set to val. | Modifies register A and flags (AF register pair). | MIN_UNSIGNED_A_VAL 42 |  |  |
+| MAX_UNSIGNED_A_VAL | val - immediate 8-bit unsigned constant | Clamp register A to a maximum value (A = min(A, val)).<br>  If A > val, then A is set to val. | Modifies register A and flags (AF register pair). | MAX_UNSIGNED_A_VAL 200 |  |  |
+| ADD_ADDR_REG | addr - memory address (label or direct)<br>  reg  - 8-bit register (not A) | Adds the value of register 'reg' to the byte at memory location 'addr'.<br>  (addr) += reg. Does NOT work with A register | Modifies register A and flags. | ADD_ADDR_REG myVar, b | add (addr), r |  |
+| ADD_ADDR_ADDR | addr1 - destination memory address<br>  addr2 - source memory address | Adds the byte at addr2 to the byte at addr1 and stores the result in addr1.<br>  (addr1) += (addr2) | Uses register A and HL; pushes and pops HL. | ADD_ADDR_ADDR var1, var2 | add (addr1), (addr2) |  |
+| ADD_IX | idx1 - IX offset destination (signed 8-bit)<br>  idx2 - IX offset source (signed 8-bit) | Adds the value at (IX + idx2) to the value at (IX + idx1).<br>  (IX+idx1) += (IX+idx2) | Modifies register A and flags. | ADD_IX 0, 1 | add (ix+idx1), (ix+idx2) |  |
+| SUM_IX | idx1 - IX offset destination (signed 8-bit)<br>  idx2 - IX offset source 1 (signed 8-bit)<br>  idx3 - IX offset source 2 (signed 8-bit) | Computes the sum of bytes at (IX+idx2) and (IX+idx3) and stores it in (IX+idx1).<br>  (IX+idx1) = (IX+idx2) + (IX+idx3) | Modifies register A and flags. | SUM_IX 0, 1, 2 | ld (ix+idx1), (ix+idx2)<br>  add (ix+idx3) |  |
+| NEG8_IXPLUS | n - signed 8-bit IX offset | Negates the value at (IX + n).<br>  (IX+n) = - (IX+n) | Uses registers A and flags. | NEG8_IXPLUS -3 |  |  |
+| ABS8_IXPLUS | n - signed 8-bit IX offset | Replaces the value at (IX+n) with its absolute value (treating it as signed).<br>  (IX+n) = abs((IX+n)) | Uses registers A and flags. | ABS8_IXPLUS 5 |  |  |
+| ABS8_A | none | Converts register A to its absolute value (if signed). | Modifies register A and flags. | ABS8_A |  |  |
+| ABS8_HLPTR | none | Converts the byte pointed to by HL to its absolute value (if signed).<br>  (HL) = abs((HL)) | Uses register A and flags. | ABS8_HLPTR |  |  |
+| ABS8_DEPTR | none | Converts the byte pointed to by DE to its absolute value (if signed).<br>  (DE) = abs((DE)) | Uses registers A and HL; swaps HL and DE temporarily.<br>  Uses flags. | ABS8_DEPTR |  |  |
+
+
