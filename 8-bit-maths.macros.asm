@@ -10,6 +10,15 @@
 ;
 ; Usage:
 ;   INCLUDE "8-bit-maths-macros.inc"
+;
+; Key Points:
+; These macros work only on 8-bit values
+;
+; Some macros modify register A and flags
+;
+; Macros using IX offsets assume signed offsets (-128..127)
+;
+; ADD_ADDR_REG does NOT accept A as reg parameter
 ; ============================================================================
 
 IFNDEF MACRO8BITMATHS
