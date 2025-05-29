@@ -235,6 +235,7 @@ ENDM
 ; Side effects:
 ;   Modifies flags.
 ;
+;
 ; Usage:
 ;   RET_UNSIGNED_A_LT_V 10
 ; ----------------------------------------------------------------------------
@@ -369,6 +370,7 @@ MACRO CALL_UNSIGNED_A_GT_V v, dest
     jp z, $+6
     call nc, dest
 ENDM
+
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_SIGNED_A_GT_V v, dest
