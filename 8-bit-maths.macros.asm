@@ -1,5 +1,3 @@
-
-  **
   ; ============================================================================
   ; Z80 8-bit Arithmetic Macros for SJASMPlus
   ; Author: Jack Stinchcombe
