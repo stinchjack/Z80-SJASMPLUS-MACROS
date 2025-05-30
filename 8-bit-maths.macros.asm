@@ -8,8 +8,6 @@
   ;   SJASMPlus syntax. These macros simplify common patterns for manipulating
   ;   8-bit values in registers and memory.
   ;
-  ; Usage:
-  ;   INCLUDE "8-bit-maths-macros.inc"
   ;
   ; Key Points:
   ; These macros work only on 8-bit values

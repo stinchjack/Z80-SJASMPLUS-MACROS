@@ -8,8 +8,6 @@
 ;   flow control using SJASMPlus syntax. These macros encapsulate conditional
 ;   logic based on comparisons of register A and memory values.
 ;
-; Usage:
-;   INCLUDE "8-bit-conditional-branch.macro.asm"
 ;
 ; Key Points:
 ; All macros perform comparisons only against register A or memory pointed by HL.
