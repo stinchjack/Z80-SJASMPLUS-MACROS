@@ -163,12 +163,23 @@ function generate_markdown(array $fileHeader, array $macros, string $filename): 
     return $md;
 }
 
-// Example usage:
-$asmFile = '8-bit-conditional-branch.macro.asm'; // Adjust path to your .asm file
+function generate_combined_markdown(string $directory = '.', string $exclude = 'sjasmplus-macros.inc.asm', string $outputFile = 'combined_macros.md') {
+    $allMarkdown = "# Z80 Macro Reference\n\n";
 
-$fileHeader = parse_file_header($asmFile);
-$macros = parse_asm_macros($asmFile);  // your existing macro parser function
+    foreach (glob("$directory/*.asm") as $file) {
+        if (basename($file) === $exclude) {
+            continue;
+        }
 
-$markdown = generate_markdown($fileHeader, $macros, '$asmFile');
+        $header = parse_file_header($file);
+        $macros = parse_asm_macros($file);
+        $markdown = generate_markdown($header, $macros, $file);
+        $allMarkdown .= $markdown . "\n\n";
+    }
 
-file_put_contents("8-bit-conditional-branch.macro.md", $markdown);
+    file_put_contents($outputFile, $allMarkdown);
+    echo "Combined Markdown saved to $outputFile\n";
+}
+
+
+generate_combined_markdown();
