@@ -13,7 +13,7 @@ Clone or download this repository, and include the macro file in your Z80 assemb
 
 ## Example usage
 
-  INCLUDE "include/macros/8-bit-maths.macros.asm"
+  INCLUDE "sjasmplus-macros.inc.asm"
 
   ld a, 20<br>
   MIN_UNSIGNED_A_VAL 42    ; Sets A to 42 if A < 42

@@ -31,6 +31,117 @@ This project is licensed under the MIT License.
 See the LICENSE file for details.
 # Z80 Macro Reference
 
+# 16-bit-load.macros.asm
+
+## Description
+
+A collection of assembly macros for Z80 16-bit load operations using
+  SJASMPlus syntax. These macros provide convenient ways to load 16-bit
+  values into register pairs and perform pointer operations.
+
+## Key Points
+
+These macros work with 16-bit register pairs (HL, BC, DE, IX, IY, SP)
+
+Some macros modify register A and flags
+
+Signed extension macros handle 8-bit to 16-bit conversion
+
+Offset macros assume 8-bit unsigned offsets (0..255) unless noted
+
+Some macros use temporary registers and stack operations
+
+| Macro name | Parameters | Description | Side effects | Usage | Z80 Equivalent | Notes |
+|------------|------------|-------------|--------------|-------|----------------|-------|
+| LD_HL_SIGNED_A | none | Sign-extends register A into HL register pair.<br>  If A is negative (bit 7 set), H becomes 0xFF, otherwise 0x00. | Modifies register A and flags (AF register pair). | LD_HL_SIGNED_A | ld hl, a (with sign extension) |  |
+| EX_BC_HL | none | Exchanges the contents of BC and HL register pairs. | Uses stack temporarily. | EX_BC_HL | ex bc, hl |  |
+| LD_HL_UNSIGNED_A | none | Zero-extends register A into HL register pair.<br>  H is set to 0x00, L is set to A. | Modifies H register. | LD_HL_UNSIGNED_A | ld hl, a (with zero extension) |  |
+| LD_HL_A | none | Alias for LD_HL_UNSIGNED_A. Zero-extends A into HL. | Modifies H register. | LD_HL_A | ld hl, a |  |
+| LD_BC_UNSIGNED_A | none | Zero-extends register A into BC register pair.<br>  B is set to 0x00, C is set to A. | Modifies B register. | LD_BC_UNSIGNED_A | ld bc, a (with zero extension) |  |
+| LD_BC_A | none | Alias for LD_BC_UNSIGNED_A. Zero-extends A into BC. | Modifies B register. | LD_BC_A | ld bc, a |  |
+| LD_IX_SP | none | Loads the current stack pointer value into IX register. | Modifies flags. | LD_IX_SP | ld ix, sp |  |
+| LD_IY_SP | none | Loads the current stack pointer value into IY register. | Modifies flags. | LD_IY_SP | ld iy, sp |  |
+| LD_HL_HLPTR_FASTER | none | Loads the 16-bit value pointed to by HL into HL register pair.<br>  Faster version that uses register A. | Modifies register A. | LD_HL_HLPTR_FASTER | ld hl, (hl) |  |
+| LD_HL_HLPTR_SLOW | none | Loads the 16-bit value pointed to by HL into HL register pair.<br>  Slower version that preserves register A. | Uses DE register temporarily. | LD_HL_HLPTR_SLOW | ld hl, (hl) |  |
+| LD_HL_SP | none | Loads the current stack pointer value into HL register pair. | Uses AF register temporarily. | LD_HL_SP | ld hl, sp |  |
+| LD_DE_HLPTR | none | Loads the 16-bit value pointed to by HL into DE register pair.<br>  HL is restored to original value. | Temporarily modifies HL. | LD_DE_HLPTR | ld de, (hl) |  |
+| LD_BC_HLPTR | none | Loads the 16-bit value pointed to by HL into BC register pair.<br>  HL is restored to original value. | Temporarily modifies HL. | LD_BC_HLPTR | ld bc, (hl) |  |
+| LD_HL_DEPTR | none | Loads the 16-bit value pointed to by DE into HL register pair.<br>  DE is restored to original value. | Temporarily exchanges DE and HL. | LD_HL_DEPTR | ld hl, (de) |  |
+| LD_BC_DEPTR | none | Loads the 16-bit value pointed to by DE into BC register pair.<br>  DE is restored to original value. | Temporarily exchanges DE and HL. | LD_BC_DEPTR | ld bc, (de) |  |
+| LD_IX_HLPLUS | n - 8-bit unsigned offset | Loads HL + n into IX register pair.<br>  IX = HL + n | Modifies register A. | LD_IX_HLPLUS 10 | ld ix, hl : add ix, n |  |
+| LD_BC_IXPLUS | n - 8-bit unsigned offset | Loads IX + n into BC register pair.<br>  BC = IX + n | Modifies register A. | LD_BC_IXPLUS 5 | ld bc, ix : add bc, n |  |
+| LD_IY_IXPLUS | n - 8-bit unsigned offset | Loads IX + n into IY register pair.<br>  IY = IX + n | Modifies register A. | LD_IY_IXPLUS 8 | ld iy, ix : add iy, n |  |
+| LD_HL_IXPLUS | n - 8-bit unsigned offset | Loads IX + n into HL register pair.<br>  HL = IX + n | Modifies register A. | LD_HL_IXPLUS 12 | ld hl, ix : add hl, n |  |
+| LD_HL_IYPLUS | n - 8-bit unsigned offset | Loads IY + n into HL register pair.<br>  HL = IY + n | Modifies register A. | LD_HL_IYPLUS 15 | ld hl, iy : add hl, n |  |
+| LD_DE_IXPLUS | n - 8-bit unsigned offset | Loads IX + n into DE register pair.<br>  DE = IX + n | Modifies register A. | LD_DE_IXPLUS 20 | ld de, ix : add de, n |  |
+| LD_DE_IYPLUS | n - 8-bit unsigned offset | Loads IY + n into DE register pair.<br>  DE = IY + n | Modifies register A. | LD_DE_IYPLUS 7 | ld de, iy : add de, n |  |
+| LD_DE_HLPLUS | n - 8-bit unsigned offset | Loads HL + n into DE register pair.<br>  DE = HL + n | Modifies register A. | LD_DE_HLPLUS 3 | ld de, hl : add de, n |  |
+| LD_DE_BC_16PLUS | val - 16-bit unsigned offset | Loads BC + val into DE register pair.<br>  DE = BC + val | Modifies register A. | LD_DE_BC_16PLUS 1000 | ld de, bc : add de, val |  |
+| LD_BC_IYPLUS | n - 8-bit unsigned offset | Loads IY + n into BC register pair.<br>  BC = IY + n | Modifies register A. | LD_BC_IYPLUS 25 | ld bc, iy : add bc, n |  |
+| LD_HL_SPPLUS | val - signed or unsigned 16-bit value | Loads SP + val into HL register pair.<br>  HL = SP + val | Modifies flags. | LD_HL_SPPLUS -10 | ld hl, val : add hl, sp |  |
+| LD_DE_SPPLUS | val - signed or unsigned 16-bit value | Loads SP + val into DE register pair.<br>  DE = SP + val | Temporarily exchanges DE and HL. | LD_DE_SPPLUS 100 | ld de, val : add de, sp |  |
+| LD_BC_SPPLUS | val - signed or unsigned 16-bit value | Loads SP + val into BC register pair.<br>  BC = SP + val | Uses HL register temporarily and stack. | LD_BC_SPPLUS 50 | ld bc, val : add bc, sp |  |
+| LD_IX_NEG_A | none | Loads the negated value of register A into IX register pair.<br>  IX = -A (where A is treated as unsigned) | Modifies register A and flags. | LD_IX_NEG_A | ld ix, a : neg ix |  |
+
+
+# 16-bit-maths-macros.asm
+
+## Description
+
+A collection of assembly macros for Z80 16-bit arithmetic operations using
+  SJASMPlus syntax. These macros simplify common patterns for manipulating
+  16-bit values in registers and memory.
+
+## Key Points
+
+These macros work on 16-bit values in register pairs and memory
+
+Many macros modify register A and flags
+
+Some macros using IX/IY offsets assume signed offsets, and some use unsigned offets - check each macro carefully
+
+Some macros temporarily use register pairs for intermediate calculations
+
+| Macro name | Parameters | Description | Side effects | Usage | Z80 Equivalent | Notes |
+|------------|------------|-------------|--------------|-------|----------------|-------|
+| ADD_BC_DE | none | Adds DE to BC register pair (BC = BC + DE). | Preserves HL by pushing/popping; modifies flags. | ADD_BC_DE | add bc, de |  |
+| ADD_BC_HL | none | Adds HL to BC register pair (BC = BC + HL). | Uses EX_BC_HL macro; modifies flags. | ADD_BC_HL | add bc, hl |  |
+| ADD_BC_BC | none | Doubles BC register pair (BC = BC + BC, equivalent to SLA BC). | Modifies flags. | ADD_BC_BC | add bc, bc  or  sla bc |  |
+| ADD_BC_SP | none | Adds SP to BC register pair (BC = BC + SP). Note: This is slow! | Uses EX_BC_HL macro; modifies flags. | ADD_BC_SP | add bc, sp |  |
+| ADD_HL_A | none | Adds register A to HL register pair (HL = HL + A), where A is unsigned. | Corrupts register A; modifies flags. | ADD_HL_A | add hl, a |  |
+| ADD_BC_A | none | Adds register A to BC register pair (BC = BC + A), where A is unsigned. | Corrupts register A; modifies flags. | ADD_BC_A | add bc, a |  |
+| ADD_DE_A | none | Adds register A to DE register pair (DE = DE + A), where A is unsigned. | Corrupts register A; modifies flags. Takes 23 ticks. | ADD_DE_A | add de, a |  |
+| ADD_IX_A | none | Adds register A to IX register pair (IX = IX + A), where A is unsigned. | Corrupts register A; modifies flags. | ADD_IX_A | add ix, a |  |
+| ADD_IY_A | none | Adds register A to IY register pair (IY = IY + A), where A is unsigned. | Corrupts register A; modifies flags. | ADD_IY_A | add iy, a |  |
+| ADD_IY_C | none | Adds register C to IY register pair (IY = IY + C), where C is unsigned. | Uses and corrupts register A; modifies flags. | ADD_IY_C | add iy, c |  |
+| ADD_IXPLUS_A | n - signed 8-bit IX offset | Adds register A to the 16-bit value at (IX+n), where A is unsigned.<br>  (IX+n) is treated as a 16-bit little-endian value. | Corrupts register A; modifies flags. | ADD_IXPLUS_A 5 | add (ix+n), a |  |
+| ADD_HL_UNSIGNED_8BITVAL | v - unsigned 8-bit value or register | Adds an 8-bit unsigned value to HL register pair (HL = HL + v). | Uses and corrupts register A; modifies flags. | ADD_HL_UNSIGNED_8BITVAL 42 | add hl, v |  |
+| ADD_DE_UNSIGNED_8BITVAL | v - unsigned 8-bit value or register | Adds an 8-bit unsigned value to DE register pair (DE = DE + v). | Uses and corrupts register A; modifies flags. | ADD_DE_UNSIGNED_8BITVAL 100 | add de, v |  |
+| ADD_HL_VAL | val - 16-bit immediate value | Adds a 16-bit immediate value to HL register pair (HL = HL + val). | Preserves DE by pushing/popping; modifies flags. | ADD_HL_VAL 1000 | add hl, val |  |
+| SUB_DE_UNSIGNED_8BITVAL | val - unsigned 8-bit value or register (not A) | Subtracts an 8-bit unsigned value from DE register pair (DE = DE - val). | Corrupts register A; modifies flags. | SUB_DE_UNSIGNED_8BITVAL 50 | sub de, val |  |
+| BIT_N_DEPTR | n - bit number (0-7) | Tests bit n of the byte pointed to by DE register pair. | Temporarily exchanges DE and HL; modifies flags. | BIT_N_DEPTR 7 | bit n, (de) |  |
+| NEG16_IX | none | Negates the IX register pair (IX = -IX). | Uses register A; modifies flags.<br><br>Source:<br>  http://z80-heaven.wikidot.com/optimization | NEG16_IX |  |  |
+| NEG16_HL | none | Negates the HL register pair (HL = -HL). | Uses register A; modifies flags.<br><br>Source:<br>  http://z80-heaven.wikidot.com/optimization | NEG16_HL |  |  |
+| NEG_HL | none | Alias for NEG16_HL. Negates the HL register pair (HL = -HL). | Uses register A; modifies flags. | NEG_HL |  |  |
+| NEG16_HLPTR | none | Negates the signed 16-bit value pointed to by HL ((HL) = -(HL)). | Uses register A; modifies flags.<br><br>Source:<br>  http://z80-heaven.wikidot.com/optimization | NEG16_HLPTR |  |  |
+| ABS16_HLPTR | none | Converts the signed 16-bit value pointed to by HL to its absolute value.<br>  ((HL) = abs((HL))) | Uses register A; modifies flags. | ABS16_HLPTR |  |  |
+| ABS16_DEPTR | none | Converts the signed 16-bit value pointed to by DE to its absolute value.<br>  ((DE) = abs((DE))) | Temporarily exchanges DE and HL; uses register A; modifies flags. | ABS16_DEPTR |  |  |
+| NEG16_DEPTR | none | Negates the signed 16-bit value pointed to by DE ((DE) = -(DE)). | Temporarily exchanges DE and HL; uses register A; modifies flags.<br><br>Source:<br>  Derived from http://z80-heaven.wikidot.com/optimization | NEG16_DEPTR |  |  |
+| NEG16_DE | none | Negates the DE register pair (DE = -DE). | Uses register A; modifies flags.<br><br>Source:<br>  http://z80-heaven.wikidot.com/optimization | NEG16_DE |  |  |
+| NEG16_BC | none | Negates the BC register pair (BC = -BC). | Uses register A; modifies flags.<br><br>Source:<br>  http://z80-heaven.wikidot.com/optimization | NEG16_BC |  |  |
+| ABS_DE | none | Converts DE register pair to its absolute value (DE = abs(DE)). | Uses NEG_DE macro; modifies flags. | ABS_DE |  |  |
+| ABS_BC | none | Converts BC register pair to its absolute value (BC = abs(BC)). | Uses NEG16_BC macro; modifies flags. | ABS_BC |  |  |
+| ADD16_DE_BC | none | Adds BC to DE register pair (DE = DE + BC). | Temporarily exchanges DE and HL; modifies flags. | ADD16_DE_BC |  |  |
+| ADD16_ADDR_DE | addr - memory address containing 16-bit value | Adds DE to the 16-bit value at memory address ((addr) = (addr) + DE). | Preserves HL by pushing/popping; modifies flags. | ADD16_ADDR_DE myVariable |  |  |
+| ADD16_ADDR | addr - memory address containing 16-bit value<br>  val  - 16-bit immediate value to add | Adds a 16-bit value to the 16-bit value at memory address ((addr) = (addr) + val). | Preserves HL and DE by pushing/popping; modifies flags. | ADD16_ADDR myVariable, 1000 |  |  |
+| ADD16_ADDR_A | addr - memory address containing 16-bit value | Adds register A to the 16-bit value at memory address ((addr) = (addr) + A). | Preserves HL by pushing/popping; uses ADD_HL_A macro; modifies flags. | ADD16_ADDR_A myVariable |  |  |
+| ADD16_ADDR_ADDR | addr1 - destination memory address<br>  addr2 - source memory address | Adds the 16-bit value at addr2 to the 16-bit value at addr1 ((addr1) = (addr1) + (addr2)). | Preserves HL and DE by pushing/popping; modifies flags. | ADD16_ADDR_ADDR var1, var2 |  |  |
+| ADC16_HL_NUM | num - 16-bit immediate value | Adds a 16-bit immediate value to HL with carry (HL = HL + num + carry). | Preserves DE by pushing/popping; modifies flags. | ADC16_HL_NUM 500 | adc hl, nn |  |
+| ADD16_HL_IXPLUS | idx - signed 8-bit IX offset | Adds the 16-bit value at (IX+idx) to HL (HL = HL + (IX+idx)). | Preserves DE by pushing/popping; modifies flags. | ADD16_HL_IXPLUS 10 | add hl, (ix+nn) |  |
+| ADD16_DE_IXPLUS | idx - signed 8-bit IX offset | Adds the 16-bit value at (IX+idx) to DE (DE = DE + (IX+idx)). | Temporarily exchanges DE and HL; uses ADD16_HL_IXPLUS macro; modifies flags. | ADD16_DE_IXPLUS 5 | add de, (ix+n) |  |
+| ADD16_IX | idx1 - signed 8-bit IX offset (destination)<br>  idx2 - signed 8-bit IX offset (source) | Adds the 16-bit value at (IX+idx2) to the 16-bit value at (IX+idx1).<br>  ((IX+idx1) = (IX+idx1) + (IX+idx2)) | Uses register A; modifies flags. | ADD16_IX 0, 2 |  |  |
+
+
 # 8-bit-conditional-branch.macro.asm
 
 ## Description
