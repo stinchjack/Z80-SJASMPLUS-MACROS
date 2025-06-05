@@ -1,0 +1,448 @@
+<h1>Z80 Macro Reference</h1>
+<h2>Macro Index (A–Z)</h2>
+<ul>
+<li><a href="#8-bit-maths-macros-abs8_a">ABS8_A</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-abs8_deptr">ABS8_DEPTR</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-abs8_hlptr">ABS8_HLPTR</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-abs8_ixplus">ABS8_IXPLUS</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-abs16_deptr">ABS16_DEPTR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-abs16_hlptr">ABS16_HLPTR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-abs_bc">ABS_BC</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-abs_de">ABS_DE</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-adc16_hl_num">ADC16_HL_NUM</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_addr">ADD16_ADDR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_addr_a">ADD16_ADDR_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_addr_addr">ADD16_ADDR_ADDR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_addr_de">ADD16_ADDR_DE</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_de_bc">ADD16_DE_BC</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_de_ixplus">ADD16_DE_IXPLUS</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_hl_ixplus">ADD16_HL_IXPLUS</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add16_ix">ADD16_IX</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-add_addr_addr">ADD_ADDR_ADDR</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-add_addr_reg">ADD_ADDR_REG</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_bc_a">ADD_BC_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_bc_bc">ADD_BC_BC</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_bc_de">ADD_BC_DE</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_bc_hl">ADD_BC_HL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_bc_sp">ADD_BC_SP</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_de_a">ADD_DE_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_de_unsigned_8bitval">ADD_DE_UNSIGNED_8BITVAL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_hl_a">ADD_HL_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_hl_unsigned_8bitval">ADD_HL_UNSIGNED_8BITVAL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_hl_val">ADD_HL_VAL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-add_ix">ADD_IX</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_ixplus_a">ADD_IXPLUS_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_ix_a">ADD_IX_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_iy_a">ADD_IY_A</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-add_iy_c">ADD_IY_C</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-bit_n_deptr">BIT_N_DEPTR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_hlptr_equ">BRANCH_HLPTR_EQU</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_hlptr_not_equ">BRANCH_HLPTR_NOT_EQU</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_if_a_equ">BRANCH_IF_A_EQU</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_if_a_not_equ">BRANCH_IF_A_NOT_EQU</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_signed_a_gte_v">BRANCH_SIGNED_A_GTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_signed_a_gt_v">BRANCH_SIGNED_A_GT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_signed_a_lte_v">BRANCH_SIGNED_A_LTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_signed_a_lt_v">BRANCH_SIGNED_A_LT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_signed_gt">BRANCH_SIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_signed_gte">BRANCH_SIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_signed_lt">BRANCH_SIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_signed_lte">BRANCH_SIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_unsigned_a_gte_v">BRANCH_UNSIGNED_A_GTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_unsigned_a_gt_v">BRANCH_UNSIGNED_A_GT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_unsigned_a_lte_v">BRANCH_UNSIGNED_A_LTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-branch_unsigned_a_lt_v">BRANCH_UNSIGNED_A_LT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_unsigned_gt">BRANCH_UNSIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_unsigned_gte">BRANCH_UNSIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_unsigned_lt">BRANCH_UNSIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-branch_unsigned_lte">BRANCH_UNSIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_signed_gt">CALL_SIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_signed_gte">CALL_SIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_signed_lt">CALL_SIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_signed_lte">CALL_SIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-call_unsigned_a_gte_v">CALL_UNSIGNED_A_GTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-call_unsigned_a_gt_v">CALL_UNSIGNED_A_GT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-call_unsigned_a_lte_v">CALL_UNSIGNED_A_LTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-call_unsigned_a_lt_v">CALL_UNSIGNED_A_LT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_unsigned_gt">CALL_UNSIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_unsigned_gte">CALL_UNSIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_unsigned_lt">CALL_UNSIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-call_unsigned_lte">CALL_UNSIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#16-bit-load-macros-ex_bc_hl">EX_BC_HL</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_a">LD_BC_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_deptr">LD_BC_DEPTR</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_hlptr">LD_BC_HLPTR</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_ixplus">LD_BC_IXPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_iyplus">LD_BC_IYPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_spplus">LD_BC_SPPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_bc_unsigned_a">LD_BC_UNSIGNED_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_bc_16plus">LD_DE_BC_16PLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_hlplus">LD_DE_HLPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_hlptr">LD_DE_HLPTR</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_ixplus">LD_DE_IXPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_iyplus">LD_DE_IYPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_de_spplus">LD_DE_SPPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_a">LD_HL_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_deptr">LD_HL_DEPTR</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_hlptr_faster">LD_HL_HLPTR_FASTER</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_hlptr_slow">LD_HL_HLPTR_SLOW</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_ixplus">LD_HL_IXPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_iyplus">LD_HL_IYPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_signed_a">LD_HL_SIGNED_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_sp">LD_HL_SP</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_spplus">LD_HL_SPPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_hl_unsigned_a">LD_HL_UNSIGNED_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_ix_hlplus">LD_IX_HLPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_ix_neg_a">LD_IX_NEG_A</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_ix_sp">LD_IX_SP</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_iy_ixplus">LD_IY_IXPLUS</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#16-bit-load-macros-ld_iy_sp">LD_IY_SP</a> <small>(16-bit-load-macros)</small></li>
+<li><a href="#8-bit-maths-macros-max_unsigned_a_val">MAX_UNSIGNED_A_VAL</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-min_unsigned_a_val">MIN_UNSIGNED_A_VAL</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-neg8_ixplus">NEG8_IXPLUS</a> <small>(8-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_bc">NEG16_BC</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_de">NEG16_DE</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_deptr">NEG16_DEPTR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_hl">NEG16_HL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_hlptr">NEG16_HLPTR</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg16_ix">NEG16_IX</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#16-bit-maths-macros-neg_hl">NEG_HL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#conditional-branch-macro-ret_signed_gt">RET_SIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_signed_gte">RET_SIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_signed_lt">RET_SIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_signed_lte">RET_SIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-ret_unsigned_a_gte_v">RET_UNSIGNED_A_GTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-ret_unsigned_a_gt_v">RET_UNSIGNED_A_GT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-ret_unsigned_a_lte_v">RET_UNSIGNED_A_LTE_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#8-bit-conditional-branch-macro-ret_unsigned_a_lt_v">RET_UNSIGNED_A_LT_V</a> <small>(8-bit-conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_unsigned_gt">RET_UNSIGNED_GT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_unsigned_gte">RET_UNSIGNED_GTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_unsigned_lt">RET_UNSIGNED_LT</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#conditional-branch-macro-ret_unsigned_lte">RET_UNSIGNED_LTE</a> <small>(conditional-branch-macro)</small></li>
+<li><a href="#16-bit-maths-macros-sub_de_unsigned_8bitval">SUB_DE_UNSIGNED_8BITVAL</a> <small>(16-bit-maths-macros)</small></li>
+<li><a href="#8-bit-maths-macros-sum_ix">SUM_IX</a> <small>(8-bit-maths-macros)</small></li>
+</ul>
+<hr>
+<h2>16-bit-load.macros.asm</h2>
+<h3>Description</h3>
+<p>A collection of assembly macros for Z80 16-bit load operations using<br />
+  SJASMPlus syntax. These macros provide convenient ways to load 16-bit<br />
+  values into register pairs and perform pointer operations.</p>
+<h3>Key Points</h3>
+<p>These macros work with 16-bit register pairs (HL, BC, DE, IX, IY, SP)<br />
+<br />
+Some macros modify register A and flags<br />
+<br />
+Signed extension macros handle 8-bit to 16-bit conversion<br />
+<br />
+Offset macros assume 8-bit unsigned offsets (0..255) unless noted<br />
+<br />
+Some macros use temporary registers and stack operations</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<thead>
+<tr><th>Macro name</th><th>Parameters</th><th>Description</th><th>Side effects</th><th>Usage</th><th>Z80 Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a id="16-bit-load-macros-ld_hl_signed_a"></a>LD_HL_SIGNED_A</td><td>none</td><td>Sign-extends register A into HL register pair.<br />
+  If A is negative (bit 7 set), H becomes 0xFF, otherwise 0x00.</td><td>Modifies register A and flags (AF register pair).</td><td>LD_HL_SIGNED_A</td><td>ld hl, a (with sign extension)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ex_bc_hl"></a>EX_BC_HL</td><td>none</td><td>Exchanges the contents of BC and HL register pairs.</td><td>Uses stack temporarily.</td><td>EX_BC_HL</td><td>ex bc, hl</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_unsigned_a"></a>LD_HL_UNSIGNED_A</td><td>none</td><td>Zero-extends register A into HL register pair.<br />
+  H is set to 0x00, L is set to A.</td><td>Modifies H register.</td><td>LD_HL_UNSIGNED_A</td><td>ld hl, a (with zero extension)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_a"></a>LD_HL_A</td><td>none</td><td>Alias for LD_HL_UNSIGNED_A. Zero-extends A into HL.</td><td>Modifies H register.</td><td>LD_HL_A</td><td>ld hl, a</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_unsigned_a"></a>LD_BC_UNSIGNED_A</td><td>none</td><td>Zero-extends register A into BC register pair.<br />
+  B is set to 0x00, C is set to A.</td><td>Modifies B register.</td><td>LD_BC_UNSIGNED_A</td><td>ld bc, a (with zero extension)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_a"></a>LD_BC_A</td><td>none</td><td>Alias for LD_BC_UNSIGNED_A. Zero-extends A into BC.</td><td>Modifies B register.</td><td>LD_BC_A</td><td>ld bc, a</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_ix_sp"></a>LD_IX_SP</td><td>none</td><td>Loads the current stack pointer value into IX register.</td><td>Modifies flags.</td><td>LD_IX_SP</td><td>ld ix, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_iy_sp"></a>LD_IY_SP</td><td>none</td><td>Loads the current stack pointer value into IY register.</td><td>Modifies flags.</td><td>LD_IY_SP</td><td>ld iy, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_hlptr_faster"></a>LD_HL_HLPTR_FASTER</td><td>none</td><td>Loads the 16-bit value pointed to by HL into HL register pair.<br />
+  Faster version that uses register A.</td><td>Modifies register A.</td><td>LD_HL_HLPTR_FASTER</td><td>ld hl, (hl)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_hlptr_slow"></a>LD_HL_HLPTR_SLOW</td><td>none</td><td>Loads the 16-bit value pointed to by HL into HL register pair.<br />
+  Slower version that preserves register A.</td><td>Uses DE register temporarily.</td><td>LD_HL_HLPTR_SLOW</td><td>ld hl, (hl)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_sp"></a>LD_HL_SP</td><td>none</td><td>Loads the current stack pointer value into HL register pair.</td><td>Uses AF register temporarily.</td><td>LD_HL_SP</td><td>ld hl, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_hlptr"></a>LD_DE_HLPTR</td><td>none</td><td>Loads the 16-bit value pointed to by HL into DE register pair.<br />
+  HL is restored to original value.</td><td>Temporarily modifies HL.</td><td>LD_DE_HLPTR</td><td>ld de, (hl)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_hlptr"></a>LD_BC_HLPTR</td><td>none</td><td>Loads the 16-bit value pointed to by HL into BC register pair.<br />
+  HL is restored to original value.</td><td>Temporarily modifies HL.</td><td>LD_BC_HLPTR</td><td>ld bc, (hl)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_deptr"></a>LD_HL_DEPTR</td><td>none</td><td>Loads the 16-bit value pointed to by DE into HL register pair.<br />
+  DE is restored to original value.</td><td>Temporarily exchanges DE and HL.</td><td>LD_HL_DEPTR</td><td>ld hl, (de)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_deptr"></a>LD_BC_DEPTR</td><td>none</td><td>Loads the 16-bit value pointed to by DE into BC register pair.<br />
+  DE is restored to original value.</td><td>Temporarily exchanges DE and HL.</td><td>LD_BC_DEPTR</td><td>ld bc, (de)</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_ix_hlplus"></a>LD_IX_HLPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads HL + n into IX register pair.<br />
+  IX = HL + n</td><td>Modifies register A.</td><td>LD_IX_HLPLUS 10</td><td>ld ix, hl : add ix, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_ixplus"></a>LD_BC_IXPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IX + n into BC register pair.<br />
+  BC = IX + n</td><td>Modifies register A.</td><td>LD_BC_IXPLUS 5</td><td>ld bc, ix : add bc, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_iy_ixplus"></a>LD_IY_IXPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IX + n into IY register pair.<br />
+  IY = IX + n</td><td>Modifies register A.</td><td>LD_IY_IXPLUS 8</td><td>ld iy, ix : add iy, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_ixplus"></a>LD_HL_IXPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IX + n into HL register pair.<br />
+  HL = IX + n</td><td>Modifies register A.</td><td>LD_HL_IXPLUS 12</td><td>ld hl, ix : add hl, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_iyplus"></a>LD_HL_IYPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IY + n into HL register pair.<br />
+  HL = IY + n</td><td>Modifies register A.</td><td>LD_HL_IYPLUS 15</td><td>ld hl, iy : add hl, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_ixplus"></a>LD_DE_IXPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IX + n into DE register pair.<br />
+  DE = IX + n</td><td>Modifies register A.</td><td>LD_DE_IXPLUS 20</td><td>ld de, ix : add de, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_iyplus"></a>LD_DE_IYPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IY + n into DE register pair.<br />
+  DE = IY + n</td><td>Modifies register A.</td><td>LD_DE_IYPLUS 7</td><td>ld de, iy : add de, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_hlplus"></a>LD_DE_HLPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads HL + n into DE register pair.<br />
+  DE = HL + n</td><td>Modifies register A.</td><td>LD_DE_HLPLUS 3</td><td>ld de, hl : add de, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_bc_16plus"></a>LD_DE_BC_16PLUS</td><td>val - 16-bit unsigned offset</td><td>Loads BC + val into DE register pair.<br />
+  DE = BC + val</td><td>Modifies register A.</td><td>LD_DE_BC_16PLUS 1000</td><td>ld de, bc : add de, val</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_iyplus"></a>LD_BC_IYPLUS</td><td>n - 8-bit unsigned offset</td><td>Loads IY + n into BC register pair.<br />
+  BC = IY + n</td><td>Modifies register A.</td><td>LD_BC_IYPLUS 25</td><td>ld bc, iy : add bc, n</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_hl_spplus"></a>LD_HL_SPPLUS</td><td>val - signed or unsigned 16-bit value</td><td>Loads SP + val into HL register pair.<br />
+  HL = SP + val</td><td>Modifies flags.</td><td>LD_HL_SPPLUS -10</td><td>ld hl, val : add hl, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_de_spplus"></a>LD_DE_SPPLUS</td><td>val - signed or unsigned 16-bit value</td><td>Loads SP + val into DE register pair.<br />
+  DE = SP + val</td><td>Temporarily exchanges DE and HL.</td><td>LD_DE_SPPLUS 100</td><td>ld de, val : add de, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_bc_spplus"></a>LD_BC_SPPLUS</td><td>val - signed or unsigned 16-bit value</td><td>Loads SP + val into BC register pair.<br />
+  BC = SP + val</td><td>Uses HL register temporarily and stack.</td><td>LD_BC_SPPLUS 50</td><td>ld bc, val : add bc, sp</td><td></td></tr>
+<tr><td><a id="16-bit-load-macros-ld_ix_neg_a"></a>LD_IX_NEG_A</td><td>none</td><td>Loads the negated value of register A into IX register pair.<br />
+  IX = -A (where A is treated as unsigned)</td><td>Modifies register A and flags.</td><td>LD_IX_NEG_A</td><td>ld ix, a : neg ix</td><td></td></tr>
+</tbody>
+</table>
+<hr>
+<h2>16-bit-maths-macros.asm</h2>
+<h3>Description</h3>
+<p>A collection of assembly macros for Z80 16-bit arithmetic operations using<br />
+  SJASMPlus syntax. These macros simplify common patterns for manipulating<br />
+  16-bit values in registers and memory.</p>
+<h3>Key Points</h3>
+<p>These macros work on 16-bit values in register pairs and memory<br />
+<br />
+Many macros modify register A and flags<br />
+<br />
+Some macros using IX/IY offsets assume signed offsets, and some use unsigned offets - check each macro carefully<br />
+<br />
+Some macros temporarily use register pairs for intermediate calculations</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<thead>
+<tr><th>Macro name</th><th>Parameters</th><th>Description</th><th>Side effects</th><th>Usage</th><th>Z80 Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a id="16-bit-maths-macros-add_bc_de"></a>ADD_BC_DE</td><td>none</td><td>Adds DE to BC register pair (BC = BC + DE).</td><td>Preserves HL by pushing/popping; modifies flags.</td><td>ADD_BC_DE</td><td>add bc, de</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_bc_hl"></a>ADD_BC_HL</td><td>none</td><td>Adds HL to BC register pair (BC = BC + HL).</td><td>Uses EX_BC_HL macro; modifies flags.</td><td>ADD_BC_HL</td><td>add bc, hl</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_bc_bc"></a>ADD_BC_BC</td><td>none</td><td>Doubles BC register pair (BC = BC + BC, equivalent to SLA BC).</td><td>Modifies flags.</td><td>ADD_BC_BC</td><td>add bc, bc  or  sla bc</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_bc_sp"></a>ADD_BC_SP</td><td>none</td><td>Adds SP to BC register pair (BC = BC + SP). Note: This is slow!</td><td>Uses EX_BC_HL macro; modifies flags.</td><td>ADD_BC_SP</td><td>add bc, sp</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_hl_a"></a>ADD_HL_A</td><td>none</td><td>Adds register A to HL register pair (HL = HL + A), where A is unsigned.</td><td>Corrupts register A; modifies flags.</td><td>ADD_HL_A</td><td>add hl, a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_bc_a"></a>ADD_BC_A</td><td>none</td><td>Adds register A to BC register pair (BC = BC + A), where A is unsigned.</td><td>Corrupts register A; modifies flags.</td><td>ADD_BC_A</td><td>add bc, a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_de_a"></a>ADD_DE_A</td><td>none</td><td>Adds register A to DE register pair (DE = DE + A), where A is unsigned.</td><td>Corrupts register A; modifies flags. Takes 23 ticks.</td><td>ADD_DE_A</td><td>add de, a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_ix_a"></a>ADD_IX_A</td><td>none</td><td>Adds register A to IX register pair (IX = IX + A), where A is unsigned.</td><td>Corrupts register A; modifies flags.</td><td>ADD_IX_A</td><td>add ix, a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_iy_a"></a>ADD_IY_A</td><td>none</td><td>Adds register A to IY register pair (IY = IY + A), where A is unsigned.</td><td>Corrupts register A; modifies flags.</td><td>ADD_IY_A</td><td>add iy, a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_iy_c"></a>ADD_IY_C</td><td>none</td><td>Adds register C to IY register pair (IY = IY + C), where C is unsigned.</td><td>Uses and corrupts register A; modifies flags.</td><td>ADD_IY_C</td><td>add iy, c</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_ixplus_a"></a>ADD_IXPLUS_A</td><td>n - signed 8-bit IX offset</td><td>Adds register A to the 16-bit value at (IX+n), where A is unsigned.<br />
+  (IX+n) is treated as a 16-bit little-endian value.</td><td>Corrupts register A; modifies flags.</td><td>ADD_IXPLUS_A 5</td><td>add (ix+n), a</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_hl_unsigned_8bitval"></a>ADD_HL_UNSIGNED_8BITVAL</td><td>v - unsigned 8-bit value or register</td><td>Adds an 8-bit unsigned value to HL register pair (HL = HL + v).</td><td>Uses and corrupts register A; modifies flags.</td><td>ADD_HL_UNSIGNED_8BITVAL 42</td><td>add hl, v</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_de_unsigned_8bitval"></a>ADD_DE_UNSIGNED_8BITVAL</td><td>v - unsigned 8-bit value or register</td><td>Adds an 8-bit unsigned value to DE register pair (DE = DE + v).</td><td>Uses and corrupts register A; modifies flags.</td><td>ADD_DE_UNSIGNED_8BITVAL 100</td><td>add de, v</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add_hl_val"></a>ADD_HL_VAL</td><td>val - 16-bit immediate value</td><td>Adds a 16-bit immediate value to HL register pair (HL = HL + val).</td><td>Preserves DE by pushing/popping; modifies flags.</td><td>ADD_HL_VAL 1000</td><td>add hl, val</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-sub_de_unsigned_8bitval"></a>SUB_DE_UNSIGNED_8BITVAL</td><td>val - unsigned 8-bit value or register (not A)</td><td>Subtracts an 8-bit unsigned value from DE register pair (DE = DE - val).</td><td>Corrupts register A; modifies flags.</td><td>SUB_DE_UNSIGNED_8BITVAL 50</td><td>sub de, val</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-bit_n_deptr"></a>BIT_N_DEPTR</td><td>n - bit number (0-7)</td><td>Tests bit n of the byte pointed to by DE register pair.</td><td>Temporarily exchanges DE and HL; modifies flags.</td><td>BIT_N_DEPTR 7</td><td>bit n, (de)</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_ix"></a>NEG16_IX</td><td>none</td><td>Negates the IX register pair (IX = -IX).</td><td>Uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  http://z80-heaven.wikidot.com/optimization</td><td>NEG16_IX</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_hl"></a>NEG16_HL</td><td>none</td><td>Negates the HL register pair (HL = -HL).</td><td>Uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  http://z80-heaven.wikidot.com/optimization</td><td>NEG16_HL</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg_hl"></a>NEG_HL</td><td>none</td><td>Alias for NEG16_HL. Negates the HL register pair (HL = -HL).</td><td>Uses register A; modifies flags.</td><td>NEG_HL</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_hlptr"></a>NEG16_HLPTR</td><td>none</td><td>Negates the signed 16-bit value pointed to by HL ((HL) = -(HL)).</td><td>Uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  http://z80-heaven.wikidot.com/optimization</td><td>NEG16_HLPTR</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-abs16_hlptr"></a>ABS16_HLPTR</td><td>none</td><td>Converts the signed 16-bit value pointed to by HL to its absolute value.<br />
+  ((HL) = abs((HL)))</td><td>Uses register A; modifies flags.</td><td>ABS16_HLPTR</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-abs16_deptr"></a>ABS16_DEPTR</td><td>none</td><td>Converts the signed 16-bit value pointed to by DE to its absolute value.<br />
+  ((DE) = abs((DE)))</td><td>Temporarily exchanges DE and HL; uses register A; modifies flags.</td><td>ABS16_DEPTR</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_deptr"></a>NEG16_DEPTR</td><td>none</td><td>Negates the signed 16-bit value pointed to by DE ((DE) = -(DE)).</td><td>Temporarily exchanges DE and HL; uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  Derived from http://z80-heaven.wikidot.com/optimization</td><td>NEG16_DEPTR</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_de"></a>NEG16_DE</td><td>none</td><td>Negates the DE register pair (DE = -DE).</td><td>Uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  http://z80-heaven.wikidot.com/optimization</td><td>NEG16_DE</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-neg16_bc"></a>NEG16_BC</td><td>none</td><td>Negates the BC register pair (BC = -BC).</td><td>Uses register A; modifies flags.<br />
+<br />
+Source:<br />
+  http://z80-heaven.wikidot.com/optimization</td><td>NEG16_BC</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-abs_de"></a>ABS_DE</td><td>none</td><td>Converts DE register pair to its absolute value (DE = abs(DE)).</td><td>Uses NEG_DE macro; modifies flags.</td><td>ABS_DE</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-abs_bc"></a>ABS_BC</td><td>none</td><td>Converts BC register pair to its absolute value (BC = abs(BC)).</td><td>Uses NEG16_BC macro; modifies flags.</td><td>ABS_BC</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_de_bc"></a>ADD16_DE_BC</td><td>none</td><td>Adds BC to DE register pair (DE = DE + BC).</td><td>Temporarily exchanges DE and HL; modifies flags.</td><td>ADD16_DE_BC</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_addr_de"></a>ADD16_ADDR_DE</td><td>addr - memory address containing 16-bit value</td><td>Adds DE to the 16-bit value at memory address ((addr) = (addr) + DE).</td><td>Preserves HL by pushing/popping; modifies flags.</td><td>ADD16_ADDR_DE myVariable</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_addr"></a>ADD16_ADDR</td><td>addr - memory address containing 16-bit value<br />
+  val  - 16-bit immediate value to add</td><td>Adds a 16-bit value to the 16-bit value at memory address ((addr) = (addr) + val).</td><td>Preserves HL and DE by pushing/popping; modifies flags.</td><td>ADD16_ADDR myVariable, 1000</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_addr_a"></a>ADD16_ADDR_A</td><td>addr - memory address containing 16-bit value</td><td>Adds register A to the 16-bit value at memory address ((addr) = (addr) + A).</td><td>Preserves HL by pushing/popping; uses ADD_HL_A macro; modifies flags.</td><td>ADD16_ADDR_A myVariable</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_addr_addr"></a>ADD16_ADDR_ADDR</td><td>addr1 - destination memory address<br />
+  addr2 - source memory address</td><td>Adds the 16-bit value at addr2 to the 16-bit value at addr1 ((addr1) = (addr1) + (addr2)).</td><td>Preserves HL and DE by pushing/popping; modifies flags.</td><td>ADD16_ADDR_ADDR var1, var2</td><td></td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-adc16_hl_num"></a>ADC16_HL_NUM</td><td>num - 16-bit immediate value</td><td>Adds a 16-bit immediate value to HL with carry (HL = HL + num + carry).</td><td>Preserves DE by pushing/popping; modifies flags.</td><td>ADC16_HL_NUM 500</td><td>adc hl, nn</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_hl_ixplus"></a>ADD16_HL_IXPLUS</td><td>idx - signed 8-bit IX offset</td><td>Adds the 16-bit value at (IX+idx) to HL (HL = HL + (IX+idx)).</td><td>Preserves DE by pushing/popping; modifies flags.</td><td>ADD16_HL_IXPLUS 10</td><td>add hl, (ix+nn)</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_de_ixplus"></a>ADD16_DE_IXPLUS</td><td>idx - signed 8-bit IX offset</td><td>Adds the 16-bit value at (IX+idx) to DE (DE = DE + (IX+idx)).</td><td>Temporarily exchanges DE and HL; uses ADD16_HL_IXPLUS macro; modifies flags.</td><td>ADD16_DE_IXPLUS 5</td><td>add de, (ix+n)</td><td></td></tr>
+<tr><td><a id="16-bit-maths-macros-add16_ix"></a>ADD16_IX</td><td>idx1 - signed 8-bit IX offset (destination)<br />
+  idx2 - signed 8-bit IX offset (source)</td><td>Adds the 16-bit value at (IX+idx2) to the 16-bit value at (IX+idx1).<br />
+  ((IX+idx1) = (IX+idx1) + (IX+idx2))</td><td>Uses register A; modifies flags.</td><td>ADD16_IX 0, 2</td><td></td><td></td></tr>
+</tbody>
+</table>
+<hr>
+<h2>8-bit-conditional-branch.macro.asm</h2>
+<h3>Description</h3>
+<p>A collection of assembly macros for Z80 8-bit conditional branching and<br />
+  flow control using SJASMPlus syntax. These macros encapsulate conditional<br />
+  logic based on comparisons of register A and memory values.</p>
+<h3>Key Points</h3>
+<p>All macros perform comparisons only against register A or memory pointed by HL.<br />
+<br />
+The CP instruction is used internally, so flags are affected.<br />
+<br />
+Macros using (HL) read from memory and load value into A, affecting A.<br />
+<br />
+Branch/call/ret destinations accept labels or addresses.<br />
+<br />
+Signed macros carefully handle signed overflow and sign bits.<br />
+<br />
+These macros only deal with 8-bit values.</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<thead>
+<tr><th>Macro name</th><th>Parameters</th><th>Description</th><th>Side effects</th><th>Usage</th><th>Z80 Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_if_a_equ"></a>BRANCH_IF_A_EQU</td><td>val     - 8-bit immediate value to compare with A<br />
+  address - label or address to jump to if condition is met</td><td>Branches to &#039;address&#039; if the value in register A equals &#039;val&#039;.</td><td>Modifies flags due to CP instruction.</td><td>BRANCH_IF_A_EQU 42, Label_Equal</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_if_a_not_equ"></a>BRANCH_IF_A_NOT_EQU</td><td>val     - 8-bit immediate value to compare with A<br />
+  address - label or address to jump to if condition is met</td><td>Branches to &#039;address&#039; if the value in register A is not equal to &#039;val&#039;.</td><td>Modifies flags due to CP instruction.</td><td>BRANCH_IF_A_NOT_EQU 10, Label_NotEqual</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_hlptr_equ"></a>BRANCH_HLPTR_EQU</td><td>val  - 8-bit immediate value to compare with (HL)<br />
+  addr - label or address to jump to if condition is met</td><td>Branches to &#039;addr&#039; if the byte at memory address pointed by HL equals &#039;val&#039;.</td><td>Uses register A; modifies flags.</td><td>BRANCH_HLPTR_EQU 0xFF, Label_HLMatch</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_hlptr_not_equ"></a>BRANCH_HLPTR_NOT_EQU</td><td>val  - 8-bit immediate value to compare with (HL)<br />
+  addr - label or address to jump to if condition is met</td><td>Branches to &#039;addr&#039; if the byte at memory address pointed by HL is not equal to &#039;val&#039;.</td><td>Uses register A; modifies flags.</td><td>BRANCH_HLPTR_NOT_EQU 0x00, Label_HLNotMatch</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_unsigned_a_lte_v"></a>BRANCH_UNSIGNED_A_LTE_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to jump if A &lt;= v (unsigned)</td><td>Branches to &#039;dest&#039; if register A is less than or equal to v (unsigned comparison).</td><td>Modifies flags.</td><td>BRANCH_UNSIGNED_A_LTE_V 100, Label_LE_100</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_unsigned_a_lt_v"></a>BRANCH_UNSIGNED_A_LT_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to jump if A &lt; v (unsigned)</td><td>Branches to &#039;dest&#039; if register A is less than v (unsigned comparison).</td><td>Modifies flags.</td><td>BRANCH_UNSIGNED_A_LT_V 50, Label_LT_50</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_unsigned_a_gte_v"></a>BRANCH_UNSIGNED_A_GTE_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to jump if A &gt;= v (unsigned)</td><td>Branches to &#039;dest&#039; if register A is greater than or equal to v (unsigned comparison).</td><td>Modifies flags.</td><td>BRANCH_UNSIGNED_A_GTE_V 200, Label_GTE_200</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_unsigned_a_gt_v"></a>BRANCH_UNSIGNED_A_GT_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to jump if A &gt; v (unsigned)</td><td>Branches to &#039;dest&#039; if register A is greater than v (unsigned comparison).</td><td>Modifies flags.</td><td>BRANCH_UNSIGNED_A_GT_V 150, Label_GT_150</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-ret_unsigned_a_lte_v"></a>RET_UNSIGNED_A_LTE_V</td><td>v - 8-bit unsigned immediate value</td><td>Returns from subroutine if A &lt;= v (unsigned comparison).</td><td>Modifies flags.</td><td>RET_UNSIGNED_A_LTE_V 42</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-ret_unsigned_a_lt_v"></a>RET_UNSIGNED_A_LT_V</td><td>v - 8-bit unsigned immediate value</td><td>Returns from subroutine if A &lt; v (unsigned comparison).</td><td>Modifies flags.</td><td>RET_UNSIGNED_A_LT_V 10</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-ret_unsigned_a_gte_v"></a>RET_UNSIGNED_A_GTE_V</td><td>v - 8-bit unsigned immediate value</td><td>Returns from subroutine if A &gt;= v (unsigned comparison).</td><td>Modifies flags.</td><td>RET_UNSIGNED_A_GTE_V 100</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-ret_unsigned_a_gt_v"></a>RET_UNSIGNED_A_GT_V</td><td>v - 8-bit unsigned immediate value</td><td>Returns from subroutine if A &gt; v (unsigned comparison).</td><td>Modifies flags.</td><td>RET_UNSIGNED_A_GT_V 200</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-call_unsigned_a_lte_v"></a>CALL_UNSIGNED_A_LTE_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to call if A &lt;= v (unsigned)</td><td>Calls subroutine at &#039;dest&#039; if A &lt;= v (unsigned comparison).</td><td>Modifies flags.</td><td>CALL_UNSIGNED_A_LTE_V 50, SomeSubroutine</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-call_unsigned_a_lt_v"></a>CALL_UNSIGNED_A_LT_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to call if A &lt; v (unsigned)</td><td>Calls subroutine at &#039;dest&#039; if A &lt; v (unsigned comparison).</td><td>Modifies flags.</td><td>CALL_UNSIGNED_A_LT_V 10, SomeSubroutine</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-call_unsigned_a_gte_v"></a>CALL_UNSIGNED_A_GTE_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to call if A &gt;= v (unsigned)</td><td>Calls subroutine at &#039;dest&#039; if A &gt;= v (unsigned comparison).</td><td>Modifies flags.</td><td>CALL_UNSIGNED_A_GTE_V 100, SomeSubroutine</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-call_unsigned_a_gt_v"></a>CALL_UNSIGNED_A_GT_V</td><td>v    - 8-bit unsigned immediate value<br />
+  dest - label or address to call if A &gt; v (unsigned)</td><td>Calls subroutine at &#039;dest&#039; if A &gt; v (unsigned comparison).</td><td>Modifies flags.</td><td>CALL_UNSIGNED_A_GT_V 200, SomeSubroutine</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_signed_a_gt_v"></a>BRANCH_SIGNED_A_GT_V</td><td>v    - 8-bit signed immediate value<br />
+  dest - label or address to jump if A &gt; v (signed)</td><td>Branches to &#039;dest&#039; if register A is greater than v considering signed comparison.<br />
+  This macro accounts for signed overflow and sign bits in the comparison.</td><td>Modifies flags.</td><td>BRANCH_SIGNED_A_GT_V -10, Label_SignedGT</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_signed_a_gte_v"></a>BRANCH_SIGNED_A_GTE_V</td><td>v    - 8-bit signed immediate value<br />
+  dest - label or address to jump if A &gt;= v (signed)</td><td>Branches to &#039;dest&#039; if register A is greater than or equal to v considering signed comparison.<br />
+  Handles overflow and sign bits.</td><td>Modifies flags.</td><td>BRANCH_SIGNED_A_GTE_V -5, Label_SignedGTE</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_signed_a_lt_v"></a>BRANCH_SIGNED_A_LT_V</td><td>v    - 8-bit signed immediate value<br />
+  dest - label or address to jump if A &lt; v (signed)</td><td>Branches to &#039;dest&#039; if register A is less than v considering signed comparison.<br />
+  Handles overflow and sign bits.</td><td>Modifies flags.</td><td>BRANCH_SIGNED_A_LT_V 10, Label_SignedLT</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-conditional-branch-macro-branch_signed_a_lte_v"></a>BRANCH_SIGNED_A_LTE_V</td><td>v    - 8-bit signed immediate value<br />
+  dest - label or address to jump if A &lt;= v (signed)</td><td>Branches to &#039;dest&#039; if register A is less than or equal to v considering signed comparison.<br />
+  Handles overflow and sign bits.</td><td>Modifies flags.</td><td>BRANCH_SIGNED_A_LTE_V 0, Label_SignedLTE</td><td></td><td></td></tr>
+</tbody>
+</table>
+<hr>
+<h2>8-bit-maths.macros.asm</h2>
+<h3>Description</h3>
+<p>A collection of assembly macros for Z80 8-bit arithmetic operations using<br />
+  SJASMPlus syntax. These macros simplify common patterns for manipulating<br />
+  8-bit values in registers and memory.</p>
+<h3>Key Points</h3>
+<p>These macros work only on 8-bit values<br />
+<br />
+Some macros modify register A and flags<br />
+<br />
+Macros using IX offsets assume signed offsets (-128..127)<br />
+<br />
+ADD_ADDR_REG does NOT accept A as reg parameter</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<thead>
+<tr><th>Macro name</th><th>Parameters</th><th>Description</th><th>Side effects</th><th>Usage</th><th>Z80 Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a id="8-bit-maths-macros-min_unsigned_a_val"></a>MIN_UNSIGNED_A_VAL</td><td>val - immediate 8-bit unsigned constant</td><td>Clamp register A to a minimum value (A = max(A, val)).<br />
+  If A &lt; val, then A is set to val.</td><td>Modifies register A and flags (AF register pair).</td><td>MIN_UNSIGNED_A_VAL 42</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-max_unsigned_a_val"></a>MAX_UNSIGNED_A_VAL</td><td>val - immediate 8-bit unsigned constant</td><td>Clamp register A to a maximum value (A = min(A, val)).<br />
+  If A &gt; val, then A is set to val.</td><td>Modifies register A and flags (AF register pair).</td><td>MAX_UNSIGNED_A_VAL 200</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-add_addr_reg"></a>ADD_ADDR_REG</td><td>addr - memory address (label or direct)<br />
+  reg  - 8-bit register (not A)</td><td>Adds the value of register &#039;reg&#039; to the byte at memory location &#039;addr&#039;.<br />
+  (addr) += reg. Does NOT work with A register</td><td>Modifies register A and flags.</td><td>ADD_ADDR_REG myVar, b</td><td>add (addr), r</td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-add_addr_addr"></a>ADD_ADDR_ADDR</td><td>addr1 - destination memory address<br />
+  addr2 - source memory address</td><td>Adds the byte at addr2 to the byte at addr1 and stores the result in addr1.<br />
+  (addr1) += (addr2)</td><td>Uses register A and HL; pushes and pops HL.</td><td>ADD_ADDR_ADDR var1, var2</td><td>add (addr1), (addr2)</td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-add_ix"></a>ADD_IX</td><td>idx1 - IX offset destination (signed 8-bit)<br />
+  idx2 - IX offset source (signed 8-bit)</td><td>Adds the value at (IX + idx2) to the value at (IX + idx1).<br />
+  (IX+idx1) += (IX+idx2)</td><td>Modifies register A and flags.</td><td>ADD_IX 0, 1</td><td>add (ix+idx1), (ix+idx2)</td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-sum_ix"></a>SUM_IX</td><td>idx1 - IX offset destination (signed 8-bit)<br />
+  idx2 - IX offset source 1 (signed 8-bit)<br />
+  idx3 - IX offset source 2 (signed 8-bit)</td><td>Computes the sum of bytes at (IX+idx2) and (IX+idx3) and stores it in (IX+idx1).<br />
+  (IX+idx1) = (IX+idx2) + (IX+idx3)</td><td>Modifies register A and flags.</td><td>SUM_IX 0, 1, 2</td><td>ld (ix+idx1), (ix+idx2)<br />
+  add (ix+idx3)</td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-neg8_ixplus"></a>NEG8_IXPLUS</td><td>n - signed 8-bit IX offset</td><td>Negates the value at (IX + n).<br />
+  (IX+n) = - (IX+n)</td><td>Uses registers A and flags.</td><td>NEG8_IXPLUS -3</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-abs8_ixplus"></a>ABS8_IXPLUS</td><td>n - signed 8-bit IX offset</td><td>Replaces the value at (IX+n) with its absolute value (treating it as signed).<br />
+  (IX+n) = abs((IX+n))</td><td>Uses registers A and flags.</td><td>ABS8_IXPLUS 5</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-abs8_a"></a>ABS8_A</td><td>none</td><td>Converts register A to its absolute value (if signed).</td><td>Modifies register A and flags.</td><td>ABS8_A</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-abs8_hlptr"></a>ABS8_HLPTR</td><td>none</td><td>Converts the byte pointed to by HL to its absolute value (if signed).<br />
+  (HL) = abs((HL))</td><td>Uses register A and flags.</td><td>ABS8_HLPTR</td><td></td><td></td></tr>
+<tr><td><a id="8-bit-maths-macros-abs8_deptr"></a>ABS8_DEPTR</td><td>none</td><td>Converts the byte pointed to by DE to its absolute value (if signed).<br />
+  (DE) = abs((DE))</td><td>Uses registers A and HL; swaps HL and DE temporarily.<br />
+  Uses flags.</td><td>ABS8_DEPTR</td><td></td><td></td></tr>
+</tbody>
+</table>
+<hr>
+<h2>conditional-branch.macro.asm</h2>
+<h3>Description</h3>
+<p>A collection of flag-based branching, calling, and returning macros for<br />
+  conditional flow control on 8-bit values using SJASMPlus syntax.<br />
+  These macros rely on flags set by prior instructions (e.g., CP, SUB, another macro).</p>
+<h3>Key Points</h3>
+<p>- These macros depend on flags from previous comparisons (e.g., CP, SUB, another macro).<br />
+- No immediate comparison is done inside these macros.<br />
+- Branching macros assume A was already compared via CP.<br />
+- Signed macros handle overflow and sign using PE/M/P flag logic.<br />
+- These macros are designed to be included *after* a comparison has occurred.<br />
+- All destinations are absolute jumps /calls.</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<thead>
+<tr><th>Macro name</th><th>Parameters</th><th>Description</th><th>Side effects</th><th>Usage</th><th>Z80 Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a id="conditional-branch-macro-branch_unsigned_lte"></a>BRANCH_UNSIGNED_LTE</td><td>dest - label or address</td><td>Jumps to dest if the previous comparison resulted in flags indicating<br />
+  less-than-or-equal-to (&lt;=) condition for two unsigned values.</td><td></td><td>BRANCH_UNSIGNED_LTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_unsigned_lt"></a>BRANCH_UNSIGNED_LT</td><td>dest - label or address</td><td>Jumps to dest if flags indicate less-than (&lt;) condition for two unsigned values.</td><td></td><td>BRANCH_UNSIGNED_LT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_unsigned_gte"></a>BRANCH_UNSIGNED_GTE</td><td>dest - label or address</td><td>Jumps to dest if flags indicate greater-than-or-equal (&gt;=) condition for two unsigned values.</td><td></td><td>BRANCH_UNSIGNED_GTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_unsigned_gt"></a>BRANCH_UNSIGNED_GT</td><td>dest - label or address</td><td>Jumps to dest if flags indicate greater (&gt;) condition for two unsigned values.</td><td></td><td>BRANCH_UNSIGNED_GT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_signed_lt"></a>BRANCH_SIGNED_LT</td><td>dest - label or address</td><td>Jumps to dest if flags indicate less-than (&lt;) condition for two signed values.</td><td></td><td>BRANCH_SIGNED_LT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_signed_lte"></a>BRANCH_SIGNED_LTE</td><td>dest - label or address</td><td>Jumps to dest flags indicate less-than-or-equal (&lt;=) condition for two signed values.</td><td></td><td>BRANCH_SIGNED_LT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_signed_gte"></a>BRANCH_SIGNED_GTE</td><td>dest - label or address</td><td>Jumps to dest flags indicate greater-than-or-equal (&gt;=) condition for two signed values.</td><td></td><td>BRANCH_SIGNED_GTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-branch_signed_gt"></a>BRANCH_SIGNED_GT</td><td>dest - label or address</td><td>Jumps to dest if flags indicate greater-than (&gt;) condition for<br />
+  two unsigned values.</td><td></td><td>BRANCH_SIGNED_GT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_unsigned_lte"></a>CALL_UNSIGNED_LTE</td><td>dest - label or address</td><td>Calls dest if flags indicate less-than-or-equal-to (&lt;=) condition for two<br />
+  unsigned values.</td><td></td><td>CALL_UNSIGNED_LTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_unsigned_lt"></a>CALL_UNSIGNED_LT</td><td>dest - label or address</td><td>Calls dest if flags indicate less-than (&lt;) condition for two unsigned values.</td><td></td><td>CALL_UNSIGNED_LT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_unsigned_gte"></a>CALL_UNSIGNED_GTE</td><td>dest - label or address</td><td>Calls dest if flags indicate greater-than-or-equal (&gt;=) condition for<br />
+  two unsigned values.</td><td></td><td>CALL_UNSIGNED_GTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_unsigned_gt"></a>CALL_UNSIGNED_GT</td><td>dest - label or address</td><td>Calls dest if flags indicate greater (&gt;) condition for two unsigned values.</td><td></td><td>CALL_UNSIGNED_GT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_signed_gte"></a>CALL_SIGNED_GTE</td><td>dest - label or address</td><td>Calls dest flags indicate greater-than-or-equal (&gt;=) condition<br />
+  for two signed values.</td><td></td><td>CALL_SIGNED_GTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_signed_gt"></a>CALL_SIGNED_GT</td><td>dest - label or address</td><td>Calls dest if flags indicate greater-than (&gt;) condition for two signed values.</td><td></td><td>CALL_SIGNED_GT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_signed_lt"></a>CALL_SIGNED_LT</td><td>dest - label or address</td><td>Calls dest if flags indicate less-than (&lt;) condition for two signed values.</td><td></td><td>CALL_SIGNED_LT SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-call_signed_lte"></a>CALL_SIGNED_LTE</td><td>dest - label or address</td><td>Calls dest flags indicate less-than-or-equal (&lt;=) condition for two signed values.</td><td></td><td>CALL_SIGNED_LTE SomeLabel</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_unsigned_lte"></a>RET_UNSIGNED_LTE</td><td>(none)</td><td>Returns if flags indicating less-than-or-equal-to (&lt;=) condition for<br />
+  two unsigned values.</td><td></td><td>RET_UNSIGNED_LTE</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_unsigned_lt"></a>RET_UNSIGNED_LT</td><td>(none)</td><td>Returns if flags indicate less-than (&lt;) condition for two unsigned values.</td><td></td><td>RET_UNSIGNED_LT</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_unsigned_gte"></a>RET_UNSIGNED_GTE</td><td>(none)</td><td>Returns if flags indicate greater-than-or-equal (&gt;=) condition for two unsigned values.</td><td></td><td>RET_UNSIGNED_GTE</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_unsigned_gt"></a>RET_UNSIGNED_GT</td><td>(none)</td><td>Returns if flags indicate greater (&gt;) condition for two unsigned values.</td><td></td><td>RET_UNSIGNED_GT</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_signed_gte"></a>RET_SIGNED_GTE</td><td>(none)</td><td>Returns flags indicate greater-than-or-equal (&gt;=) condition for two signed values.</td><td></td><td>RET_SIGNED_GTE</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_signed_gt"></a>RET_SIGNED_GT</td><td>(none)</td><td>Returns if flags indicate greater-than (&gt;) condition for<br />
+  two signed values.</td><td></td><td>RET_SIGNED_GT</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_signed_lt"></a>RET_SIGNED_LT</td><td>(none)</td><td>Returns if flags indicate less-than (&lt;) condition for two signed values.</td><td></td><td>RET_SIGNED_LT</td><td></td><td></td></tr>
+<tr><td><a id="conditional-branch-macro-ret_signed_lte"></a>RET_SIGNED_LTE</td><td>(none)</td><td>Returns if flags indicate less-than-or-equal-to (&lt;=) condition for<br />
+  two signed values.</td><td></td><td>RET_SIGNED_LTE</td><td></td><td></td></tr>
+</tbody>
+</table>
+<hr>
