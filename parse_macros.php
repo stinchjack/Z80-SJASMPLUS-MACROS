@@ -163,6 +163,48 @@ function generate_markdown(array $fileHeader, array $macros, string $filename): 
     return $md;
 }
 
+function generate_html(array $fileHeader, array $macros, string $filename): string {
+    $fileAnchorPrefix = strtolower(str_replace([' ', '.', '_'], '-', basename($filename, '.asm')));
+    $html = "<h2>" . htmlspecialchars(basename($filename)) . "</h2>\n";
+
+    if (!empty($fileHeader['Description'])) {
+        $html .= "<h3>Description</h3>\n<p>" . nl2br(htmlspecialchars($fileHeader['Description'])) . "</p>\n";
+    }
+
+    if (!empty($fileHeader['Key Points'])) {
+        $html .= "<h3>Key Points</h3>\n<p>" . nl2br(htmlspecialchars($fileHeader['Key Points'])) . "</p>\n";
+    }
+
+    $html .= "<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n";
+    $html .= "<thead>\n<tr>"
+           . "<th>Macro name</th>"
+           . "<th>Parameters</th>"
+           . "<th>Description</th>"
+           . "<th>Side effects</th>"
+           . "<th>Usage</th>"
+           . "<th>Z80 Equivalent</th>"
+           . "<th>Notes</th>"
+           . "</tr>\n</thead>\n<tbody>\n";
+
+    foreach ($macros as $macroName => $info) {
+        // Generate a unique anchor like: math-abs
+        $macroAnchor = $fileAnchorPrefix . '-' . strtolower($macroName);
+        $html .= "<tr>"
+               . "<td><a id=\"$macroAnchor\"></a>" . htmlspecialchars($macroName) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Parameters'] ?? '')) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Description'] ?? '')) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Side effects'] ?? '')) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Usage'] ?? '')) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Z80 Equivalent'] ?? '')) . "</td>"
+               . "<td>" . nl2br(htmlspecialchars($info['Notes'] ?? '')) . "</td>"
+               . "</tr>\n";
+    }
+
+    $html .= "</tbody>\n</table>\n";
+
+    return $html;
+}
+
 function generate_combined_markdown(string $directory = '.', string $exclude = 'sjasmplus-macros.inc.asm', string $outputFile = 'combined_macros.md') {
     $allMarkdown = "# Z80 Macro Reference\n\n";
 
@@ -181,5 +223,70 @@ function generate_combined_markdown(string $directory = '.', string $exclude = '
     echo "Combined Markdown saved to $outputFile\n";
 }
 
+function generate_combined_html(string $directory = '.', string $exclude = 'sjasmplus-macros.inc.asm', string $outputFile = 'combined_macros.html') {
+    $allHtml = "";
 
-generate_combined_markdown();
+    foreach (glob("$directory/*.asm") as $file) {
+        if (basename($file) === $exclude) {
+            continue;
+        }
+
+        $header = parse_file_header($file);
+        $macros = parse_asm_macros($file);
+        $html = generate_html($header, $macros, $file);
+        $allHtml .= $html . "<hr>\n";
+    }
+
+
+    return $allHtml;
+}
+
+
+function prepend_macro_index_to_html(string $htmlContent): string {
+    $pattern = '/<td><a id="([^"]+)"><\/a>([^<]*)<\/td>/i';
+    preg_match_all($pattern, $htmlContent, $matches, PREG_SET_ORDER);
+
+    $macroEntries = [];
+
+    foreach ($matches as $match) {
+        $anchor = $match[1];            // e.g., "math-abs"
+        $macroName = trim($match[2]);   // e.g., "ABS"
+
+        if ($macroName === '') {
+            continue;
+        }
+
+        // Try to extract filename from anchor
+        if (preg_match('/^(.+)-([a-zA-Z0-9_]+)$/', $anchor, $parts)) {
+            $file = $parts[1];
+        } else {
+            $file = '?';
+        }
+
+        $macroEntries[$macroName] = [
+            'anchor' => $anchor,
+            'file' => $file,
+        ];
+    }
+
+    // Sort by macro name
+    ksort($macroEntries, SORT_NATURAL | SORT_FLAG_CASE);
+
+    // Build the index HTML
+    $index = "<h1>Z80 Macro Reference</h1>\n";
+    $index .= "<h2>Macro Index (A–Z)</h2>\n<ul>\n";
+
+    foreach ($macroEntries as $macroName => $info) {
+        $index .= "<li><a href=\"#{$info['anchor']}\">" . htmlspecialchars($macroName) . "</a> "
+                . "<small>(" . htmlspecialchars($info['file']) . ")</small></li>\n";
+    }
+
+    $index .= "</ul>\n<hr>\n";
+
+    return $index . $htmlContent;
+}
+
+$html = generate_combined_html();
+$finalHtml = prepend_macro_index_to_html($html);
+file_put_contents('combined_macros.html', $finalHtml);
+echo "Final HTML with macro index saved to combined_macros.html\n";
