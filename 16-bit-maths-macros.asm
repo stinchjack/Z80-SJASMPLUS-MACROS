@@ -671,6 +671,28 @@
   ENDM
 
   ; ----------------------------------------------------------------------------
+  ; ABS_HL
+  ; ------
+  ; Parameters:
+  ;   none
+  ;
+  ; Description:
+  ;   Converts HL register pair to its absolute value (DE = abs(DE)).
+  ;
+  ; Side effects:
+  ;   Uses NEG16_HL macro; modifies A and flags.
+  ;
+  ; Usage:
+  ;   ABS_DE
+  ; ----------------------------------------------------------------------------
+  MACRO ABS_HL
+      bit 7, h
+      jr z, .end
+      NEG16_HL
+.end:
+  ENDM
+
+  ; ----------------------------------------------------------------------------
   ; ABS_DE
   ; ------
   ; Parameters:
@@ -680,7 +702,8 @@
   ;   Converts DE register pair to its absolute value (DE = abs(DE)).
   ;
   ; Side effects:
-  ;   Uses NEG_DE macro; modifies flags.
+  ;   Uses NEG_DE macro; modifies A and flags.
+  ;
   ;
   ; Usage:
   ;   ABS_DE
@@ -702,7 +725,8 @@
   ;   Converts BC register pair to its absolute value (BC = abs(BC)).
   ;
   ; Side effects:
-  ;   Uses NEG16_BC macro; modifies flags.
+  ;   Uses NEG16_BC macro; modifies A and flags.
+  ;
   ;
   ; Usage:
   ;   ABS_BC

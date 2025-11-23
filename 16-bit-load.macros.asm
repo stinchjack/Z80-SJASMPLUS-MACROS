@@ -50,6 +50,32 @@
   ENDM
 
   ; ----------------------------------------------------------------------------
+  ; LD_BC_SIGNED_A
+  ; --------------
+  ; Parameters:
+  ;   none
+  ;
+  ; Description:
+  ;   Sign-extends register A into BC register pair.
+  ;   If A is negative (bit 7 set), B becomes 0xFF, otherwise 0x00.
+  ;
+  ; Side effects:
+  ;   Modifies register A and flags (AF register pair).
+  ;
+  ; Z80 Equivalent:
+  ;   ld bc, a (with sign extension)
+  ;
+  ; Usage:
+  ;   LD_BC_SIGNED_A
+  ; ----------------------------------------------------------------------------
+  MACRO LD_BC_SIGNED_A
+      ld c, a
+      rlca                    ; move sign bit to carry flag, Cf set = negative
+      sbc a, a                ; A = 0xFF if input A was <0 and 0x00 if A was>=0
+      ld b, a
+  ENDM
+
+  ; ----------------------------------------------------------------------------
   ; EX_BC_HL
   ; ---------
   ; Parameters:

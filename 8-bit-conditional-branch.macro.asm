@@ -24,8 +24,8 @@
 ;
 ; ============================================================================
 
-IFNDEF MACRO8BITCONDITIONALBRANCH
-DEFINE MACRO8BITCONDITIONALBRANCH
+  IFNDEF MACRO8BITCONDITIONALBRANCH
+  DEFINE MACRO8BITCONDITIONALBRANCH
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_IF_A_EQU val, address
@@ -43,10 +43,10 @@ DEFINE MACRO8BITCONDITIONALBRANCH
 ; Usage:
 ;   BRANCH_IF_A_EQU 42, Label_Equal
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_IF_A_EQU val, address
-    cp val
-    jp z, address
-ENDM
+  MACRO BRANCH_IF_A_EQU val, address
+      cp val
+      jp z, address
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_IF_A_NOT_EQU val, address
@@ -64,10 +64,10 @@ ENDM
 ; Usage:
 ;   BRANCH_IF_A_NOT_EQU 10, Label_NotEqual
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_IF_A_NOT_EQU val, address
-    cp val
-    jp nz, address
-ENDM
+  MACRO BRANCH_IF_A_NOT_EQU val, address
+      cp val
+      jp nz, address
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_HLPTR_EQU val, addr
@@ -85,11 +85,11 @@ ENDM
 ; Usage:
 ;   BRANCH_HLPTR_EQU 0xFF, Label_HLMatch
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_HLPTR_EQU val, addr
-    ld a, val
-    cp (hl)
-    jp z, addr
-ENDM
+  MACRO BRANCH_HLPTR_EQU val, addr
+      ld a, val
+      cp (hl)
+      jp z, addr
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_HLPTR_NOT_EQU val, addr
@@ -107,11 +107,11 @@ ENDM
 ; Usage:
 ;   BRANCH_HLPTR_NOT_EQU 0x00, Label_HLNotMatch
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_HLPTR_NOT_EQU val, addr
-    ld a, val
-    cp (hl)
-    jp nz, addr
-ENDM
+  MACRO BRANCH_HLPTR_NOT_EQU val, addr
+      ld a, val
+      cp (hl)
+      jp nz, addr
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_UNSIGNED_A_LTE_V v, dest
@@ -129,11 +129,11 @@ ENDM
 ; Usage:
 ;   BRANCH_UNSIGNED_A_LTE_V 100, Label_LE_100
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_UNSIGNED_A_LTE_V v, dest
-    cp v
-    jp z, dest
-    jp c, dest
-ENDM
+  MACRO BRANCH_UNSIGNED_A_LTE_V v, dest
+      cp v
+      jp z, dest
+      jp c, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_UNSIGNED_A_LT_V v, dest
@@ -151,10 +151,10 @@ ENDM
 ; Usage:
 ;   BRANCH_UNSIGNED_A_LT_V 50, Label_LT_50
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_UNSIGNED_A_LT_V v, dest
-    cp v
-    jp c, dest
-ENDM
+  MACRO BRANCH_UNSIGNED_A_LT_V v, dest
+      cp v
+      jp c, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_UNSIGNED_A_GTE_V v, dest
@@ -172,10 +172,10 @@ ENDM
 ; Usage:
 ;   BRANCH_UNSIGNED_A_GTE_V 200, Label_GTE_200
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_UNSIGNED_A_GTE_V v, dest
-    cp v
-    jp nc, dest
-ENDM
+  MACRO BRANCH_UNSIGNED_A_GTE_V v, dest
+      cp v
+      jp nc, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_UNSIGNED_A_GT_V v, dest
@@ -193,12 +193,12 @@ ENDM
 ; Usage:
 ;   BRANCH_UNSIGNED_A_GT_V 150, Label_GT_150
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_UNSIGNED_A_GT_V v, dest
-    cp v
-    jr z, .end
-    jp nc, dest
-.end:
-ENDM
+  MACRO BRANCH_UNSIGNED_A_GT_V v, dest
+      cp v
+      jr z, .end
+      jp nc, dest
+  .end:
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; RET_UNSIGNED_A_LTE_V v
@@ -215,11 +215,11 @@ ENDM
 ; Usage:
 ;   RET_UNSIGNED_A_LTE_V 42
 ; ----------------------------------------------------------------------------
-MACRO RET_UNSIGNED_A_LTE_V v
-    cp v
-    ret z
-    ret c
-ENDM
+  MACRO RET_UNSIGNED_A_LTE_V v
+      cp v
+      ret z
+      ret c
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; RET_UNSIGNED_A_LT_V v
@@ -237,10 +237,10 @@ ENDM
 ; Usage:
 ;   RET_UNSIGNED_A_LT_V 10
 ; ----------------------------------------------------------------------------
-MACRO RET_UNSIGNED_A_LT_V v
-    cp v
-    ret c
-ENDM
+  MACRO RET_UNSIGNED_A_LT_V v
+      cp v
+      ret c
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; RET_UNSIGNED_A_GTE_V v
@@ -257,10 +257,10 @@ ENDM
 ; Usage:
 ;   RET_UNSIGNED_A_GTE_V 100
 ; ----------------------------------------------------------------------------
-MACRO RET_UNSIGNED_A_GTE_V v
-    cp v
-    ret nc
-ENDM
+  MACRO RET_UNSIGNED_A_GTE_V v
+      cp v
+      ret nc
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; RET_UNSIGNED_A_GT_V v
@@ -277,11 +277,11 @@ ENDM
 ; Usage:
 ;   RET_UNSIGNED_A_GT_V 200
 ; ----------------------------------------------------------------------------
-MACRO RET_UNSIGNED_A_GT_V v
-    cp v
-    jp z, $+4
-    ret nc
-ENDM
+  MACRO RET_UNSIGNED_A_GT_V v
+      cp v
+      jp z, $+4
+      ret nc
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; CALL_UNSIGNED_A_LTE_V v, dest
@@ -299,11 +299,11 @@ ENDM
 ; Usage:
 ;   CALL_UNSIGNED_A_LTE_V 50, SomeSubroutine
 ; ----------------------------------------------------------------------------
-MACRO CALL_UNSIGNED_A_LTE_V v, dest
-    cp v
-    call z, dest
-    call c, dest
-ENDM
+  MACRO CALL_UNSIGNED_A_LTE_V v, dest
+      cp v
+      call z, dest
+      call c, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; CALL_UNSIGNED_A_LT_V v, dest
@@ -321,10 +321,10 @@ ENDM
 ; Usage:
 ;   CALL_UNSIGNED_A_LT_V 10, SomeSubroutine
 ; ----------------------------------------------------------------------------
-MACRO CALL_UNSIGNED_A_LT_V v, dest
-    cp v
-    call c, dest
-ENDM
+  MACRO CALL_UNSIGNED_A_LT_V v, dest
+      cp v
+      call c, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; CALL_UNSIGNED_A_GTE_V v, dest
@@ -342,10 +342,10 @@ ENDM
 ; Usage:
 ;   CALL_UNSIGNED_A_GTE_V 100, SomeSubroutine
 ; ----------------------------------------------------------------------------
-MACRO CALL_UNSIGNED_A_GTE_V v, dest
-    cp v
-    call nc, dest
-ENDM
+  MACRO CALL_UNSIGNED_A_GTE_V v, dest
+      cp v
+      call nc, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; CALL_UNSIGNED_A_GT_V v, dest
@@ -363,11 +363,11 @@ ENDM
 ; Usage:
 ;   CALL_UNSIGNED_A_GT_V 200, SomeSubroutine
 ; ----------------------------------------------------------------------------
-MACRO CALL_UNSIGNED_A_GT_V v, dest
-    cp v
-    jp z, $+6
-    call nc, dest
-ENDM
+  MACRO CALL_UNSIGNED_A_GT_V v, dest
+      cp v
+      jp z, $+6
+      call nc, dest
+  ENDM
 
 
 ; ----------------------------------------------------------------------------
@@ -387,14 +387,14 @@ ENDM
 ; Usage:
 ;   BRANCH_SIGNED_A_GT_V -10, Label_SignedGT
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_SIGNED_A_GT_V v, dest
-    cp v
-    jp z, $+15
-    jp pe, $+9
-    jp p, dest
-    jp $+6
-    jp m, dest
-ENDM
+  MACRO BRANCH_SIGNED_A_GT_V v, dest
+      cp v
+      jp z, $+15
+      jp pe, $+9
+      jp p, dest
+      jp $+6
+      jp m, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_SIGNED_A_GTE_V v, dest
@@ -413,14 +413,14 @@ ENDM
 ; Usage:
 ;   BRANCH_SIGNED_A_GTE_V -5, Label_SignedGTE
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_SIGNED_A_GTE_V v, dest
-    cp v
-    jp pe, $+9
-    jp p, dest
-    jr .end
-    jp m, dest
-.end:
-ENDM
+  MACRO BRANCH_SIGNED_A_GTE_V v, dest
+      cp v
+      jp pe, $+9
+      jp p, dest
+      jr .end
+      jp m, dest
+  .end:
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_SIGNED_A_LT_V v, dest
@@ -439,13 +439,13 @@ ENDM
 ; Usage:
 ;   BRANCH_SIGNED_A_LT_V 10, Label_SignedLT
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_SIGNED_A_LT_V v, dest
-    cp v
-    jp pe, $+9
-    jp m, dest
-    jp $+6
-    jp p, dest
-ENDM
+  MACRO BRANCH_SIGNED_A_LT_V v, dest
+      cp v
+      jp pe, $+9
+      jp m, dest
+      jp $+6
+      jp p, dest
+  ENDM
 
 ; ----------------------------------------------------------------------------
 ; BRANCH_SIGNED_A_LTE_V v, dest
@@ -464,14 +464,14 @@ ENDM
 ; Usage:
 ;   BRANCH_SIGNED_A_LTE_V 0, Label_SignedLTE
 ; ----------------------------------------------------------------------------
-MACRO BRANCH_SIGNED_A_LTE_V v, dest
-    cp v
-    jp z, dest
-    jp pe, $+9
-    jp m, dest
-    jr. end
-    jp p, dest
-.end:
-ENDM
+  MACRO BRANCH_SIGNED_A_LTE_V v, dest
+      cp v
+      jp z, dest
+      jp pe, $+9
+      jp m, dest
+      jr. end
+      jp p, dest
+  .end:
+  ENDM
 
-ENDIF
+  ENDIF
